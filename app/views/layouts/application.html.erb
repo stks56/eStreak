@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>e-Streak</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-logo">
+        <%= link_to("e-Streak", "/") %>
+      </div>
+      <div class="header-menus">
+        <ul>
+          <li>
+            <%= link_to("Games", "/games") %>
+          </li>
+          <li>
+            <%= link_to("Ranking", "") %>
+          </li>
+          <li>
+            <%= link_to("新着記事", "/posts") %>
+          </li>
+          <li>
+            <%= link_to("新規登録", "") %>
+          </li>
+          <li>
+            <%= link_to("投稿する", "") %>
+          </li>
+          <li>
+            <%= link_to("About", "/about") %>
+          </li>
+          <%= link_to("") do %>
+            <div class="header-btn">
+              ログイン
+            </div>
+          <% end %>
+        </ul>
+      </div>
+    </header>
+    <%= yield %>
+  </body>
+</html>

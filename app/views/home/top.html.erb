@@ -1,0 +1,60 @@
+<div class="main-container">
+  <div class="top-container">
+    <div class="rbga">
+      <h1>welcome to e-Streak !!</h1>
+      <p>e-Streakはゲーマーの為のコミュニティサイトです。</p>
+      <p>トッププロの知識、戦術、テクニックを投稿して、共に上を目指しましょう。</p>
+      <div class="btn-container">
+        <div class="btn">
+          新規登録
+        </div>
+        <div class="btn">
+          ログイン
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h2>人気記事</h2>
+    <div class="container2">
+      <div class="item-list">
+        <ul>
+          <li>今日</li>
+          <li>週間</li>
+          <li>月間</li>
+        </ul>
+      </div>
+
+      <div class="content-container">
+        <%= image_tag('users/icon.jpg') %>
+        <h3>title</h3>
+        <span>@official_account</span>
+        <div class="content">本日、パッチノート7.2が公開されました。明日の定期メンテナンスで実装になります。</div>
+        <span>いいね！</span>
+        <span class="content-date">投稿：2019/03/03 14:50</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>新着記事</h2>
+    <div class="item-list">
+      <ul>
+        <li>総合</li>
+      </ul>
+    </div>
+    <div class="container2">
+      <% @posts.each do |post| %>
+        <div class="content-container">
+          <%= image_tag('users/icon.jpg') %>
+          <h3><%= post.title %></h3>
+          <span>@official_account</span>
+          <div class="content"><%= post.content %></div>
+          <span>いいね！</span>
+          <span class="content-date">投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

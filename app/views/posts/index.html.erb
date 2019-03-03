@@ -1,0 +1,25 @@
+<div class="main-container">
+  <div class="container">
+    <h2>新着記事</h2>
+    <div class="item-list">
+      <ul>
+        <li>総合</li>
+      </ul>
+    </div>
+    <div class="container2">
+      <% @posts.each do |post| %>
+        <div class="content-container">
+          <%= image_tag('users/icon.jpg') %>
+          <h3><%= post.title %></h3>
+          <span>@official_account</span>
+          <div class="content"><%= post.content %></div>
+          <span>いいね！</span>
+          <div class="content-data">
+            <span>カテゴリー：</span>
+            <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
