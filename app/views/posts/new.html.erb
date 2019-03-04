@@ -1,0 +1,22 @@
+<div class="main-container">
+  <div class="post-new-container">
+    <% @post.errors.full_messages.each do |message| %>
+      <div class="error">
+        <%= message %>
+      </div>
+    <% end %>
+    <%= form_tag("/posts/create") do %>
+      <h2>投稿する</h2>
+      <h3>タイトル</h3>
+      <input type="text" name="title" class="title" value="<%= @post.title %>">
+      <h3>カテゴリー</h3>
+      <select name="game_id">
+        <option value="1">League of Legends</option>
+        <option value="2">APEX Legends</option>
+      </select>
+      <h3>本文</h3>
+      <textarea name="content"><%= @post.content %></textarea>
+      <input type="submit" value="投稿" class="submit-btn">
+    <% end %>
+  </div>
+</div>

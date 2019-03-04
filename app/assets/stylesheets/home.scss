@@ -60,6 +60,7 @@ body {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 // ヘッダー
@@ -111,7 +112,21 @@ header {
   margin: 5px;
 }
 
-// メイン
+// flash
+
+.flash {
+  padding: 10px 0;
+  color: white;
+  background-color: #e0162e;
+  text-align: center;
+  position: absolute;
+  top: 50px;
+  z-index: 1;
+  width: 100%;
+  font-size: 14px;
+}
+
+// top
 
 .main-container {
   padding: 50px 0;
@@ -156,6 +171,8 @@ header {
   margin: 20px;
   font-size: 18px;
 }
+
+// posts
 
 .container {
   width: 800px;
@@ -215,7 +232,90 @@ header {
   position: absolute;
   bottom: 0;
 }
+// posts-show
 
+.post-show-container {
+  border: solid 1px #bcbcbc;
+  background-color: white;
+  margin: 30px auto;
+  width: 800px;
+  box-shadow: 0 0 8px black;
+  padding: 50px;
+}
+
+.post-show-container h3 {
+  font-size: 36px;
+  margin-bottom: 50px;
+  border-bottom: solid 1px #bcbcbc;
+  padding-bottom: 5px;
+}
+
+.post-show-container p {
+  line-height: 20px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.post-show-menu {
+  float: right;
+}
+
+.post-show-menu a {
+  text-decoration: underline;
+  padding: 0 5px;
+}
+
+// post-new
+
+.post-new-container {
+  border: solid 1px #bcbcbc;
+  background-color: white;
+  margin: 30px auto;
+  width: 800px;
+  box-shadow: 0 0 8px black;
+  padding: 50px;
+}
+
+.post-new-container h2 {
+  font-size: 36px;
+  padding-bottom: 5px;
+}
+
+.post-new-container h3 {
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.title, select {
+  width: 300px;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.post-new-container textarea {
+  width: 100%;
+  height: 400px;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+.submit-btn {
+  border-style: none;
+  background-color: #e0162e;
+  color: white;
+  font-size: 18px;
+  height: 50px;
+  width: 120px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.8;
+}
+
+.error {
+  color: red;
+}
 // about
 
 .about-container {
@@ -264,8 +364,30 @@ header {
   line-height: 26px;
 }
 
-// games-show
+// user-new
 
-.games-show-container {
-  
+.user-new-container {
+  border: solid 1px #bcbcbc;
+  background-color: white;
+  margin: 30px auto;
+  width: 500px;
+  box-shadow: 0 0 8px black;
+  padding: 50px;
+  text-align: center;
+}
+
+.user-new-container h2 {
+  font-size: 36px;
+  padding-bottom: 10px;
+}
+
+.user-new-container h3 {
+  line-height: 20px;
+  font-size: 18px;
+}
+
+.user-new-container input {
+  width: 500px;
+  font-size: 20px;
+  margin: 10px 0;
 }
