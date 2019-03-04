@@ -20,7 +20,7 @@
             <%= link_to("Games", "/games") %>
           </li>
           <li>
-            <%= link_to("Ranking", "") %>
+            <%= link_to("人気記事", "") %>
           </li>
           <li>
             <%= link_to("新着記事", "/posts") %>
@@ -29,7 +29,7 @@
             <%= link_to("新規登録", "") %>
           </li>
           <li>
-            <%= link_to("投稿する", "") %>
+            <%= link_to("投稿する", "/posts/new") %>
           </li>
           <li>
             <%= link_to("About", "/about") %>
@@ -41,6 +41,11 @@
           <% end %>
         </ul>
       </div>
+      <% if flash[:notice] %>
+        <div class="flash">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
     </header>
     <%= yield %>
   </body>

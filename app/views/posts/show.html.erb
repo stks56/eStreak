@@ -1,10 +1,10 @@
 <div class="main-container">
   <div class="post-show-container">
     <h3><%= @post.title %></h3>
-    <p><%= @post.content %></p>
+    <p><%= simple_format(@post.content) %></p>
     <div class="post-show-menu">
-      <%= link_to("編集", "posts/#{@post.id}/update") %>
-      <%= link_to("削除", "posts/#{@post.id}/destroy") %>
+      <%= link_to("編集", "/posts/#{@post.id}/edit") %>
+      <%= link_to("削除", "/posts/#{@post.id}/destroy", {method: "post"}) %>
     </div>
   </div>
 </div>

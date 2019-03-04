@@ -10,18 +10,20 @@
         </ul>
       </div>
       <% @posts.each do |post| %>
-        <div class="post-container">
-          <%= image_tag('users/icon.jpg') %>
-          <div class="post-container2">
-            <h3><%= post.title %></h3>
-            <span>@official_account</span>
-            <div class="post-data">
-              <span class="post-like">いいね！</span>
-              <span class="">カテゴリー：game_name_link</span>
-              <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+        <%= link_to("/posts/#{post.id}") do %>
+          <div class="post-container">
+            <%= image_tag('users/icon.jpg') %>
+            <div class="post-container2">
+              <h3><%= post.title %></h3>
+              <span>@official_account</span>
+              <div class="post-data">
+                <span class="post-like">いいね！</span>
+                <span class="">カテゴリー：game_name_link</span>
+                <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -32,18 +34,20 @@
       <div class="item-list">
       </div>
       <% @posts.each do |post| %>
-        <div class="post-container">
-          <%= image_tag('users/icon.jpg') %>
-          <div class="post-container2">
-            <h3><%= post.title %></h3>
-            <span>@official_account</span>
-            <div class="post-data">
-              <span class="post-like">いいね！</span>
-              <span class="">カテゴリー：game_name_link</span>
-              <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+        <%= link_to("/posts/#{post.id}") do %>
+          <div class="post-container">
+            <%= image_tag('users/icon.jpg') %>
+            <div class="post-container2">
+              <h3><%= post.title %></h3>
+              <span>@official_account</span>
+              <div class="post-data">
+                <span class="post-like">いいね！</span>
+                <span class="">カテゴリー：game_name_link</span>
+                <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>
