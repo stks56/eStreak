@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'new' => 'users#new'
+  post 'users/create' => 'users#create'
+
   get 'games' => 'games#index'
   get 'games/:game_name' => 'games#show'
 

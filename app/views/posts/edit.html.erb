@@ -6,10 +6,10 @@
       </div>
     <% end %>
     <%= form_tag("/posts/#{@post.id}/update") do %>
+      <h2>編集</h2>
       <h3>タイトル</h3>
       <input type="text" name="title" class="title" value="<%= @post.title %>">
-      <h3>カテゴリー</h3>
-      <p><%= @post.game_id %></p>
+      <h3>カテゴリー：<%= @post.game_id %></h3>
       <h3>本文</h3>
       <textarea name="content"><%= @post.content %></textarea>
       <input type="submit" value="編集" class="submit-btn">

@@ -260,6 +260,11 @@ header {
   float: right;
 }
 
+.post-show-menu a {
+  text-decoration: underline;
+  padding: 0 5px;
+}
+
 // post-new
 
 .post-new-container {
@@ -271,9 +276,14 @@ header {
   padding: 50px;
 }
 
-.post-new-container h3 {
+.post-new-container h2 {
   font-size: 36px;
   padding-bottom: 5px;
+}
+
+.post-new-container h3 {
+  font-size: 18px;
+  line-height: 20px;
 }
 
 .title, select {
@@ -354,4 +364,30 @@ header {
   line-height: 26px;
 }
 
-// games-show
+// user-new
+
+.user-new-container {
+  border: solid 1px #bcbcbc;
+  background-color: white;
+  margin: 30px auto;
+  width: 500px;
+  box-shadow: 0 0 8px black;
+  padding: 50px;
+  text-align: center;
+}
+
+.user-new-container h2 {
+  font-size: 36px;
+  padding-bottom: 10px;
+}
+
+.user-new-container h3 {
+  line-height: 20px;
+  font-size: 18px;
+}
+
+.user-new-container input {
+  width: 500px;
+  font-size: 20px;
+  margin: 10px 0;
+}

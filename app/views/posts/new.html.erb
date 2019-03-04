@@ -6,6 +6,7 @@
       </div>
     <% end %>
     <%= form_tag("/posts/create") do %>
+      <h2>投稿する</h2>
       <h3>タイトル</h3>
       <input type="text" name="title" class="title" value="<%= @post.title %>">
       <h3>カテゴリー</h3>
