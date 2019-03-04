@@ -4,5 +4,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    @game = Game.find_by(name: params[:game_name])
+    @posts = Post.where(game_id: @game.id)
   end
 end
