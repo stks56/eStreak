@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'games/:game_name' => 'games#show'
 
   get 'posts' => 'posts#index'
+  get 'posts/:id' => 'posts#show'
 
   get '/' => 'home#top'
   get 'about' => 'home#about'
