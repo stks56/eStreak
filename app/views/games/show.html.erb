@@ -1,0 +1,50 @@
+<div class="main-container">
+  <div class="container">
+    <h2>人気記事</h2>
+    <div class="container2">
+      <div class="item-list">
+        <ul>
+          <li>今日</li>
+          <li>週間</li>
+          <li>月間</li>
+        </ul>
+      </div>
+      <% @posts.each do |post| %>
+        <div class="post-container">
+          <%= image_tag('users/icon.jpg') %>
+          <div class="post-container2">
+            <h3><%= post.title %></h3>
+            <span>@official_account</span>
+            <div class="post-data">
+              <span class="post-like">いいね！</span>
+              <span class="">カテゴリー：game_name_link</span>
+              <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>新着記事</h2>
+    <div class="container2">
+      <div class="item-list">
+      </div>
+      <% @posts.each do |post| %>
+        <div class="post-container">
+          <%= image_tag('users/icon.jpg') %>
+          <div class="post-container2">
+            <h3><%= post.title %></h3>
+            <span>@official_account</span>
+            <div class="post-data">
+              <span class="post-like">いいね！</span>
+              <span class="">カテゴリー：game_name_link</span>
+              <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

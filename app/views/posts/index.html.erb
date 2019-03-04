@@ -1,22 +1,23 @@
 <div class="main-container">
   <div class="container">
     <h2>新着記事</h2>
-    <div class="item-list">
-      <ul>
-        <li>総合</li>
-      </ul>
-    </div>
     <div class="container2">
+      <div class="item-list">
+        <ul>
+          <li>総合</li>
+        </ul>
+      </div>
       <% @posts.each do |post| %>
-        <div class="content-container">
+        <div class="post-container">
           <%= image_tag('users/icon.jpg') %>
-          <h3><%= post.title %></h3>
-          <span>@official_account</span>
-          <div class="content"><%= post.content %></div>
-          <span>いいね！</span>
-          <div class="content-data">
-            <span>カテゴリー：</span>
-            <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+          <div class="post-container2">
+            <h3><%= post.title %></h3>
+            <span>@official_account</span>
+            <div class="post-data">
+              <span class="post-like">いいね！</span>
+              <span class="">カテゴリー：game_name_link</span>
+              <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+            </div>
           </div>
         </div>
       <% end %>
