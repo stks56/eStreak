@@ -16,7 +16,7 @@ class PostsController < ApplicationController
       title: params[:title],
       content: params[:content],
       game_id: params[:game_id],
-      user_id: "1"
+      user_id: @current_user.id
     )
     if @post.save
       flash[:notice] = "記事を投稿しました"
