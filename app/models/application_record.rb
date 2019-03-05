@@ -12,4 +12,8 @@ class ApplicationRecord < ActiveRecord::Base
   def posts
     return Post.where(user_id: self.id).order("created_at desc")
   end
+
+  def likecount
+    return Like.where(post_id: self.id).count(:user_id)
+  end
 end

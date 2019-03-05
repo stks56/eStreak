@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post 'likes/:post_id/create' => 'likes#create'
+  post 'likes/:post_id/destroy' => 'likes#destroy'
+
   get 'users/:user_id/edit' => 'users#edit'
   get 'users/:user_id' => 'users#show'
   get 'signup' => 'users#new'
@@ -13,11 +16,11 @@ Rails.application.routes.draw do
 
   get 'posts' => 'posts#index'
   get 'posts/new' => 'posts#new'
-  get 'posts/:id' => 'posts#show'
-  get 'posts/:id/edit' => 'posts#edit'
+  get 'posts/:post_id' => 'posts#show'
+  get 'posts/:post_id/edit' => 'posts#edit'
   post 'posts/create' => 'posts#create'
-  post 'posts/:id/update' => 'posts#update'
-  post 'posts/:id/destroy' => 'posts#destroy'
+  post 'posts/:post_id/update' => 'posts#update'
+  post 'posts/:post_id/destroy' => 'posts#destroy'
 
   get '/' => 'home#top'
   get 'about' => 'home#about'
