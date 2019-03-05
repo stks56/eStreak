@@ -3,4 +3,5 @@ class Post < ApplicationRecord
   validates :content, {presence: true}
   validates :game_id, {presence: true}
   validates :user_id, {presence: true}
+
 end

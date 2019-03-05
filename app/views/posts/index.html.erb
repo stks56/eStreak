@@ -10,13 +10,13 @@
       <% @posts.each do |post| %>
         <%= link_to("/posts/#{post.id}") do %>
           <div class="post-container">
-            <%= image_tag('users/icon.jpg') %>
+            <%= image_tag("/user_image/#{post.user.image_name}") %>
             <div class="post-container2">
               <h3><%= post.title %></h3>
-              <span>@official_account</span>
+              <span>@<%= post.user.name %></span>
               <div class="post-data">
-                <span class="post-like">いいね！</span>
-                <span class="">カテゴリー：game_name_link</span>
+                <span class="fas fa-heart"><%= post.likecount %></span>
+                <span>カテゴリー：<%= post.game.name.gsub("_", " ") %></span>
                 <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
               </div>
             </div>
