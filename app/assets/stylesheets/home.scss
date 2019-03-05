@@ -153,6 +153,7 @@ header {
   background-image: url("top.jpg");
   background-size: cover;
   height: 500px;
+  text-align: center;
 }
 
 .rgba {
@@ -163,7 +164,6 @@ header {
 .top-container h1 {
   color: white;
   font-size: 48px;
-  text-align: center;
   padding: 60px;
 }
 
@@ -176,17 +176,18 @@ header {
 
 .btn-container {
   margin: 0 auto;
-  width: 300px;
+  width: 400px;
   padding: 60px;
+
 }
 
 .btn {
   color: white;
-  display: inline;
+  display: inline-block;
   background-color: #e0162e;
   padding: 14px 20px;
-  margin: 20px;
   font-size: 18px;
+  margin: 20px;
 }
 
 // posts
