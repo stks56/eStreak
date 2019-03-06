@@ -6,12 +6,8 @@
         <p>e-Streakはゲーマーの為のコミュニティサイトです。</p>
         <p>トッププロの知識、戦術、テクニックを投稿して、共に上を目指しましょう。</p>
         <div class="btn-container">
-          <div class="btn">
-            新規登録
-          </div>
-          <div class="btn">
-            ログイン
-          </div>
+          <%= link_to("新規登録", "/signup", {class: "btn"}) %>
+          <%= link_to("ログイン", "/login", {class: "btn"}) %>
         </div>
       </div>
     </div>
