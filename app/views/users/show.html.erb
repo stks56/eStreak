@@ -22,8 +22,8 @@
               <h3><%= post.title %></h3>
               <span>@<%= post.user.name %></span>
               <div class="post-data">
-                <span class="post-like">いいね！</span>
-                <span class="">カテゴリー：<%= post.game.name %></span>
+                <span class="fas fa-heart"><%= post.likes.count %></span>
+                <span>カテゴリー：<%= post.game.name.gsub("_", " ") %></span>
                 <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
               </div>
             </div>

@@ -4,7 +4,7 @@
       <div class="games-container">
         <%= image_tag("games/#{game.id}/logo.jpg") %>
         <div class="game-info">
-          <h3><%= game.name.gsub("_", " ") %></h3>
+          <h3><%= game.name.truncate(17).gsub("_", " ") %></h3>
         </div>
       </div>
     <% end %>
