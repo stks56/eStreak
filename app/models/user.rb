@@ -4,4 +4,7 @@ class User < ApplicationRecord
   validates :password, {presence: true}
   validates :image_name, {presence: true}
 
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :follower, dependent: :destroy
 end

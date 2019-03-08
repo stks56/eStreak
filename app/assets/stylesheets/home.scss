@@ -152,13 +152,13 @@ header {
 .top-container {
   background-image: url("top.jpg");
   background-size: cover;
-  height: 500px;
+  height: 600px;
   text-align: center;
 }
 
 .rgba {
 	background-color: rgba(0,0,0,0.6);
-  height: 500px;
+  height: 100%;
 }
 
 .top-container h1 {
@@ -268,6 +268,7 @@ header {
   width: 100%;
   height: 50px;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .user-data img {
