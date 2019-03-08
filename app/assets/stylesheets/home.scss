@@ -190,7 +190,7 @@ header {
   margin: 20px;
 }
 
-// posts
+// posts-index
 
 .container {
   width: 800px;
@@ -253,6 +253,10 @@ header {
   font-size: 15px;
 }
 
+.kaminari {
+  text-align: center;
+  margin: 10px;
+}
 // posts-show
 
 .post-show-container {
