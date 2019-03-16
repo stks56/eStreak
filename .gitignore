@@ -28,5 +28,5 @@
 
 #dbseed
 
-/db/seed.rb
+/db/seeds.rb
 /db/data
