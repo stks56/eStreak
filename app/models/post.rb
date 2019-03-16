@@ -8,5 +8,6 @@ class Post < ApplicationRecord
   belongs_to :game
 
   has_many :likes
+  accepts_nested_attributes_for :likes
   has_many :users, through: :likes
 end

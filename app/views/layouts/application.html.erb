@@ -35,7 +35,7 @@
             </li>
             <%= link_to("/users/#{@current_user.id}") do %>
               <div class="header-userinfo">
-                <%= image_tag("/user_image/#{@current_user.image_name}") %>
+                <%= image_tag @current_user.image.to_s %>
                 <%= @current_user.name %>
               </div>
             <% end %>

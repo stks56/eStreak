@@ -1,9 +1,18 @@
+<style>
+  body {
+    background-image: url("<%= @post.game.game_image.background_image.to_s %>");
+    background-size: cover;
+  }
+</style>
 <div class="main-container">
   <div class="post-show-container">
     <div class="user-data">
-      <%= image_tag("/user_image/#{@post.user.image_name}") %>
-      <span>執筆者：<%= @post.user.name %></span>
-      <span>カテゴリー：<%= @post.game.name.gsub("_", " ") %></span>
+      <%= link_to("/users/#{@post.user.id}") do %>
+        <%= image_tag @post.user.image.to_s %>
+        <span>執筆者：<%= @post.user.name %></span>
+      <% end %>
+      <%= link_to("カテゴリー：#{@post.game.name}", "/games/#{@post.game.name}") %>
+      <span></span>
     </div>
     <h3><%= @post.title %></h3>
     <p><%= simple_format(@post.content) %></p>

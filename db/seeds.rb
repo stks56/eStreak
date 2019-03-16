@@ -9,21 +9,26 @@ User.create!(
   name: "Alice",
   email: "a",
   password: "a",
-  image_name: "default_user.jpg",
+  image: File.open("./db/data/user/image/default.jpg"),
 )
 
 User.create!(
   name: "Bub",
   email: "b",
   password: "b",
-  image_name: "default_user.jpg",
+  image: File.open("./db/data/user/image/default.jpg"),
 )
 
-Game.create!(name: "League_of_Legends")
-Game.create!(name: "APEX_Legends")
-Game.create!(name: "PLAYERUNKNOWN'S_BATTLEGROUNDS")
+Game.create!(name: "League of Legends")
+GameImage.create!(game_id: 1, icon_image: File.open("./db/data/game_image/icon_image/1.jpg"), background_image: File.open("./db/data/game_image/background_image/1.jpg") )
+Game.create!(name: "APEX Legends")
+GameImage.create!(game_id: 2, icon_image: File.open("./db/data/game_image/icon_image/2.jpg"), background_image: File.open("./db/data/game_image/background_image/2.jpg") )
+Game.create!(name: "PLAYERUNKNOWN'S BATTLEGROUNDS")
+GameImage.create!(game_id: 3, icon_image: File.open("./db/data/game_image/icon_image/3.jpg"), background_image: File.open("./db/data/game_image/background_image/3.jpg") )
 Game.create!(name: "Fortnite")
+GameImage.create!(game_id: 4, icon_image: File.open("./db/data/game_image/icon_image/4.jpg"), background_image: File.open("./db/data/game_image/background_image/4.jpg") )
 Game.create!(name: "Hearthstone")
+GameImage.create!(game_id: 5, icon_image: File.open("./db/data/game_image/icon_image/5.jpg"), background_image: File.open("./db/data/game_image/background_image/5.jpg") )
 
 (1..5).each do |i|
   (1..10).each do |ii|
@@ -35,3 +40,5 @@ Game.create!(name: "Hearthstone")
    )
   end
 end
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

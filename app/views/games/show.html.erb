@@ -1,6 +1,12 @@
-<div class="main-container" style"">
+<style>
+  .main-container {
+    background-image: url("<%= @game.game_image.background_image.to_s %>");
+    background-size: contain;
+  }
+</style>
+<div class="main-container">
   <div class="container">
-    <h2>人気記事</h2>
+    <h2><%= @game.name.gsub("_", " ") %>の人気記事</h2>
     <div class="container2">
       <div class="item-list">
         <ul>
@@ -14,26 +20,29 @@
   </div>
 
   <div class="container">
-    <h2>新着記事</h2>
+    <h2><%= @game.name %>の新着記事</h2>
     <div class="container2">
       <div class="item-list">
       </div>
       <% @posts.each do |post| %>
         <%= link_to("/posts/#{post.id}") do %>
           <div class="post-container">
-            <%= image_tag("/user_image/#{post.user.image_name}") %>
+            <%= image_tag post.user.image.to_s %>
             <div class="post-container2">
               <h3><%= post.title %></h3>
               <span>@<%= post.user.name %></span>
               <div class="post-data">
                 <span class="post-like">いいね！</span>
-                <span class="">カテゴリー：<%= post.game.name.gsub("_", " ") %></span>
+                <span class="">カテゴリー：<%= post.game.name %></span>
                 <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
               </div>
             </div>
           </div>
         <% end %>
       <% end %>
+    </div>
+    <div class="kaminari">
+      <%= paginate @posts %>
     </div>
   </div>
 </div>
