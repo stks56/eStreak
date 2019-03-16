@@ -27,6 +27,5 @@
 /config/master.key
 
 # データ関係
-/db/seeds.rb
 /db/data
 /public/uploads
