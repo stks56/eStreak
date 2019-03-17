@@ -38,6 +38,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rails-i18n'
 
 gem 'kaminari', '~> 1.1.1'
+gem 'activeadmin'
+gem 'devise'
+gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem 'fog-aws', '~> 3.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

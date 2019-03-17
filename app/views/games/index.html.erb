@@ -2,9 +2,9 @@
   <% @games.each do |game|%>
     <%= link_to("games/#{game.name}") do %>
       <div class="games-container">
-        <%= image_tag("games/#{game.id}/logo.jpg") %>
+        <%= image_tag game.game_image.icon_image.to_s %>
         <div class="game-info">
-          <h3><%= game.name.truncate(17).gsub("_", " ") %></h3>
+          <h3><%= game.name.truncate(17) %></h3>
         </div>
       </div>
     <% end %>

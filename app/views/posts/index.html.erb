@@ -10,7 +10,7 @@
       <% @posts.each do |post| %>
         <%= link_to("/posts/#{post.id}") do %>
           <div class="post-container">
-            <%= image_tag("/user_image/#{post.user.image_name}") %>
+            <%= image_tag post.user.image.to_s %>
             <div class="post-container2">
               <h3><%= post.title %></h3>
               <span>@<%= post.user.name %></span>
