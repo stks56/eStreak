@@ -29,3 +29,6 @@
 # データ関係
 /db/data
 /public/uploads
+
+# dotenv-rails
+/.env
