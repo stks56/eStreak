@@ -1,9 +1,9 @@
-<div class="main-container">
+<div class="main-wrapper">
   <div class="user-show-container">
     <%= image_tag @user.image.to_s %>
     <h3><%= @user.name %></h3>
     <div class="user-show-menu">
-      <% if @current_user.id == @user.id %>
+      <% if @current_user && @current_user.id == @user.id %>
         <%= link_to("編集", "/users/#{@user.id}/edit") %>
         <%= link_to("ログアウト", "/logout", {method: "post"}) %>
       <% end %>
