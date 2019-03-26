@@ -9,7 +9,6 @@
 // top
 
 .main-wrapper {
-  margin: 0 auto;
   padding-top: 50px;
 }
 
@@ -18,16 +17,16 @@
 }
 
 .top-container {
-  background-image: url("top.jpg");
-  background-size: cover;
-  height: 600px;
+  background: url("top.jpg") center center/ cover;
+  height: 100vh;
   text-align: center;
 }
 
 .top-container h1 {
   color: white;
   font-size: 48px;
-  padding: 60px;
+  padding-top: 200px;
+  padding-bottom: 60px;
   letter-spacing: 2px;
 }
 
@@ -54,9 +53,8 @@
 }
 
 .top-container2 {
-  background-image: url("top2.jpg");
-  background-size: cover;
-  height: 600px;
+  background: url("top2.jpg") center center/ cover;
+  height: 100vh;
   text-align: center;
 }
 
@@ -80,10 +78,11 @@
 
 .item-list {
   height: 20px;
-  background-color: #bcbcbc;
+  background-color: #222;
   height: 36px;
   line-height: 36px;
-  border-bottom: solid 1px black;
+  border: solid 1px black;
+  color: white;
 }
 
 .item-list li {
@@ -109,6 +108,7 @@
   width: 50px;
   float: left;
   padding: 8px;
+  border-radius: 15px;
 }
 
 .post-container h3 {
@@ -123,8 +123,13 @@
   right: 3px;
   font-size: 15px;
 }
+// post-index
 
-// posts-show
+.post-index-container, .like-index-container{
+  margin: 0 auto;
+  width: 900px;
+}
+// post-show
 
 .post-show-container {
   border: solid 1px #bcbcbc;
@@ -145,6 +150,7 @@
 .user-data img {
   width: 50px;
   height: 50px;
+  border-radius: 15px;
 }
 
 .user-data span {
@@ -266,14 +272,16 @@
   margin-bottom: 10px;
 }
 
-// games
+// game
 
 .games-container {
   margin: 40px;
   float: left;
   border-radius: 5px;
-  background-color: white;
+  background-color: #222;
   width: 200px;
+  box-shadow: 0 0 8px black;
+  border: solid 1px black;
 }
 
 .games-container img {
@@ -287,9 +295,14 @@
   font-size: 20px;
   color: black;
   line-height: 26px;
+  color: white;
 }
-// games-show
+// game-show
 
+.game-show-container {
+  margin: 0 auto;
+  width: 1300px;
+}
 .right-sidebar {
   width: 300px;
   float: left;
@@ -382,6 +395,7 @@
 .user-show-container img {
   height: 200px;
   width: 200px;
+  border-radius: 15px;
 }
 
 .user-show-container h3 {
@@ -409,6 +423,7 @@
 .user-edit-container img {
   height: 80px;
   width: 80px;
+  border-radius: 15px;
 }
 
 .user-edit-container h2 {
