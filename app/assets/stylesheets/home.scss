@@ -10,7 +10,7 @@
 
 .main-wrapper {
   margin: 0 auto;
-  padding: 50px 0;
+  padding-top: 50px;
 }
 
 .main-container {
@@ -24,15 +24,11 @@
   text-align: center;
 }
 
-.rgba {
-	background-color: rgba(0,0,0,0.6);
-  height: 100%;
-}
-
 .top-container h1 {
   color: white;
   font-size: 48px;
   padding: 60px;
+  letter-spacing: 2px;
 }
 
 .top-container p {
@@ -46,7 +42,6 @@
   margin: 0 auto;
   width: 400px;
   padding: 60px;
-
 }
 
 .btn {
@@ -56,6 +51,13 @@
   padding: 14px 20px;
   font-size: 18px;
   margin: 20px;
+}
+
+.top-container2 {
+  background-image: url("top2.jpg");
+  background-size: cover;
+  height: 600px;
+  text-align: center;
 }
 
 // posts-index
@@ -122,10 +124,6 @@
   font-size: 15px;
 }
 
-.kaminari {
-  text-align: center;
-  margin: 10px;
-}
 // posts-show
 
 .post-show-container {
