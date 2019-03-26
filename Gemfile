@@ -43,6 +43,7 @@ gem 'devise'
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 gem 'fog-aws', '~> 3.4'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.1'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

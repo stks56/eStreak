@@ -5,7 +5,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find_by(name: params[:game_name])
-    @posts = Post.where(game_id: @game.id).page(params[:page]).per(10)
+    @posts = Post.where(game_id: @game.id).page(params[:page]).per(10).order("created_at desc")
     @twitch_streams = TwitchApi.get_streams_with_cache(params[:game_name], 8)
   end
 end
