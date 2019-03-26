@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  get 'likes' => 'likes#index'
   post 'likes/:post_id/create' => 'likes#create'
   post 'likes/:post_id/destroy' => 'likes#destroy'
 
