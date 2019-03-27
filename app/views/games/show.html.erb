@@ -21,20 +21,24 @@
             </ul>
           </div>
           <% @posts_rank.each do |post| %>
-            <%= link_to("/posts/#{post.id}") do %>
-              <div class="post-container">
-                <%= image_tag post.user.image.to_s %>
-                <div class="post-container2">
-                  <h3><%= post.title %></h3>
-                  <span>@<%= post.user.name %></span>
-                  <div class="post-data">
-                    <span class="fas fa-heart"><%= post.likes.count %></span>
-                    <span class="">カテゴリー：<%= post.game.name %></span>
-                    <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
-                  </div>
+            <div class="post-container">
+              <%= link_to("/users/#{post.user.id}") do %>
+                <div class="post-container-image">
+                  <%= image_tag post.user.image.to_s %>
+                </div>
+              <% end %>
+              <div class="post-container-body">
+                <div class="post-content">
+                  <h3><%= link_to(post.title, "/posts/#{post.id}")  %></h3>
+                  <span>@<%= link_to(post.user.name, "/users/#{post.user.id}") %></span>
+                </div>
+                <div class="post-data">
+                  <span class="fas fa-heart"><%= post.likes.count %></span>
+                  <span class="">カテゴリー：<%= link_to(post.game.name, "/games/#{post.game.name}") %></span>
+                  <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
                 </div>
               </div>
-            <% end %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -44,20 +48,24 @@
           <div class="item-list">
           </div>
           <% @posts.each do |post| %>
-            <%= link_to("/posts/#{post.id}") do %>
-              <div class="post-container">
-                <%= image_tag post.user.image.to_s %>
-                <div class="post-container2">
-                  <h3><%= post.title %></h3>
-                  <span>@<%= post.user.name %></span>
-                  <div class="post-data">
-                    <span class="fas fa-heart"><%= post.likes.count %></span>
-                    <span class="">カテゴリー：<%= post.game.name %></span>
-                    <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
-                  </div>
+            <div class="post-container">
+              <%= link_to("/users/#{post.user.id}") do %>
+                <div class="post-container-image">
+                  <%= image_tag post.user.image.to_s %>
+                </div>
+              <% end %>
+              <div class="post-container-body">
+                <div class="post-content">
+                  <h3><%= link_to(post.title, "/posts/#{post.id}")  %></h3>
+                  <span>@<%= link_to(post.user.name, "/users/#{post.user.id}") %></span>
+                </div>
+                <div class="post-data">
+                  <span class="fas fa-heart"><%= post.likes.count %></span>
+                  <span class="">カテゴリー：<%= link_to(post.game.name, "/games/#{post.game.name}") %></span>
+                  <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
                 </div>
               </div>
-            <% end %>
+            </div>
           <% end %>
         </div>
         <%= paginate @posts %>
@@ -73,8 +81,10 @@
             <% user = TwitchApi.get_user_with_cache(stream["user_id"]) %>
             <%= link_to("https://www.twitch.tv/#{user[0]["login"]}") do %>
               <div class="stream-container">
-                <%= image_tag user[0]["profile_image_url"] %>
-                <div class="stream-container2">
+                <div class="stream-container-image">
+                  <%= image_tag user[0]["profile_image_url"] %>
+                </div>
+                <div class="stream-container-content">
                   <h3><%= stream["title"].truncate(20) %></h3>
                   <div class="stream-data">
                     <span class="fas fa-user"><%= stream["viewer_count"] %></span>

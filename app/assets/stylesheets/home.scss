@@ -9,7 +9,9 @@
 // top
 
 .main-wrapper {
+  background: url("background.jpg") center center / cover no-repeat fixed;
   padding-top: 50px;
+  flex: 1;
 }
 
 .main-container {
@@ -18,7 +20,7 @@
 
 .top-container {
   background: url("top.jpg") center center/ cover;
-  height: 100vh;
+  flex: 1;
   text-align: center;
   color: white;
 
@@ -102,33 +104,47 @@
 .post-container {
   border: solid 1px #bcbcbc;
   background-color: white;
-}
+  display: flex;
 
-.post-container2 {
-  min-height: 58px;
-  padding: 5px;
-  position: relative;
-}
+  .post-container-image {
+    height: 50px;
+    width: 50px;
+    padding: 8px;
 
-.post-container img {
-  height: 50px;
-  width: 50px;
-  float: left;
-  padding: 8px;
-  border-radius: 15px;
-}
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 15px;
+    }
+  }
 
-.post-container h3 {
-  font-size: 20px;
-  display: inline;
-  font-weight: bold;
-}
+  .post-container-body {
+    padding: 5px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
-.post-data {
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
-  font-size: 15px;
+    .post-content {
+      flex: 1;
+      word-break : break-all;
+
+      h3 {
+        font-size: 20px;
+        display: inline;
+        font-weight: bold;
+        }
+    }
+
+    .post-data {
+      font-size: 15px;
+      margin-top: auto;
+      margin-left: auto;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .post-index-container, .like-index-container{
@@ -151,16 +167,16 @@
   height: 50px;
   margin-bottom: 30px;
   position: relative;
-}
 
-.user-data img {
-  width: 50px;
-  height: 50px;
-  border-radius: 15px;
-}
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
 
-.user-data span {
-  margin: 0 5px;
+  a {
+    color: blue;
+  }
 }
 
 .post-show-container h3 {
