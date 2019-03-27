@@ -1,4 +1,13 @@
 <div class="main-wrapper">
+  <div class="game-header">
+    <div class="game-header-container" style="background: linear-gradient(rgba(255, 255, 255, 0), black), url(<%= @game.game_image.background_image.to_s %>) center center/ cover;">
+      <%= image_tag @game.game_image.icon_image.to_s %>
+      <h1><%= @game.name %></h1>
+      <span>投稿数：<%= @game.posts.count %></span>
+    </div>
+    <div class="game-header-item-list">
+    </div>
+  </div>
   <div class="game-show-container">
     <div class="main-container">
       <div class="container">

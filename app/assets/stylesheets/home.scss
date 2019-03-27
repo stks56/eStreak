@@ -58,7 +58,7 @@
   text-align: center;
 }
 
-// posts-index
+// post-index
 
 .container {
   width: 800px;
@@ -123,7 +123,6 @@
   right: 3px;
   font-size: 15px;
 }
-// post-index
 
 .post-index-container, .like-index-container{
   margin: 0 auto;
@@ -270,86 +269,6 @@
   line-height: 20px;
   font-size: 16px;
   margin-bottom: 10px;
-}
-
-// game
-
-.games-container {
-  margin: 40px;
-  float: left;
-  border-radius: 5px;
-  background-color: #222;
-  width: 200px;
-  box-shadow: 0 0 8px black;
-  border: solid 1px black;
-}
-
-.games-container img {
-  width: 200px;
-  height: 200px;
-  border-radius: 5px 5px 0 0;
-}
-
-.game-info h3 {
-  text-align: center;
-  font-size: 20px;
-  color: black;
-  line-height: 26px;
-  color: white;
-}
-// game-show
-
-.game-show-container {
-  margin: 0 auto;
-  width: 1300px;
-}
-.right-sidebar {
-  width: 300px;
-  float: left;
-}
-
-.sidebar-container {
-  width: 300px;
-  margin: 50px;
-}
-
-.sidebar-container2 {
-  box-shadow: 0 0 8px black;
-}
-
-.sidebar-container h2 {
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 34px;
-  color: white;
-}
-
-.stream-container {
-  background-color: white;
-  border: solid 1px #bcbcbc;
-}
-
-.stream-container img {
-  width: 50px;
-  height: 50px;
-  padding: 5px;
-  float: left;
-}
-
-.stream-container2 {
-  height: 60px;
-  position: relative;
-}
-
-.stream-container2 h3 {
-  font-size: 20px;
-}
-
-.stream-data {
-  position: absolute;
-  bottom: 3px;
-  left: 60px;
-  font-size: 15px;
 }
 
 // users-new
