@@ -20,42 +20,49 @@
   background: url("top.jpg") center center/ cover;
   height: 100vh;
   text-align: center;
-}
-
-.top-container h1 {
   color: white;
-  font-size: 48px;
-  padding-top: 200px;
-  padding-bottom: 60px;
-  letter-spacing: 2px;
-}
 
-.top-container p {
-  color: white;
-  font-size: 24px;
-  text-align: center;
-  line-height: 36px;
+  h1 {
+    font-size: 56px;
+    padding-top: 200px;
+    padding-bottom: 60px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px black;
+  }
+
+  p {
+    font-size: 24px;
+    text-align: center;
+    line-height: 36px;
+  }
 }
 
 .btn-container {
   margin: 0 auto;
   width: 400px;
   padding: 60px;
-}
 
-.btn {
-  color: white;
-  display: inline-block;
-  background-color: #e0162e;
-  padding: 14px 20px;
-  font-size: 18px;
-  margin: 20px;
-}
+  .btn {
+    color: white;
+    display: inline-block;
+    background-color: #e0162e;
+    padding: 14px 20px;
+    font-size: 18px;
+    margin: 20px;
+  }
 
-.top-container2 {
-  background: url("top2.jpg") center center/ cover;
-  height: 100vh;
-  text-align: center;
+  .fab {
+    width: 300px;
+  }
+
+  .fa-twitter {
+    background-color: #00aced;
+  }
+
+  .fa-twitch {
+    background-color: #6441A4;
+  }
 }
 
 // post-index
