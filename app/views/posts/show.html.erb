@@ -3,10 +3,9 @@
     <div class="user-data">
       <%= link_to("/users/#{@post.user.id}") do %>
         <%= image_tag @post.user.image.to_s %>
-        <span>執筆者：<%= @post.user.name %></span>
       <% end %>
-      <%= link_to("カテゴリー：#{@post.game.name}", "/games/#{@post.game.name}") %>
-      <span></span>
+      <span>執筆者：<%= link_to(@post.user.name, "/users/#{@post.user.id}") %></span>
+      <span>カテゴリー：<%= link_to(@post.game.name, "/games/#{@post.game.name}") %></span>
     </div>
     <h3><%= @post.title %></h3>
     <p><%= simple_format(@post.content) %></p>
