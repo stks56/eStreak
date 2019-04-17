@@ -1,6 +1,6 @@
 <div class="main-wrapper">
   <% @games.each do |game|%>
-    <%= link_to("games/#{game.name}") do %>
+    <%= link_to("/games/#{game.name}") do %>
       <div class="games-container">
         <%= image_tag game.game_image.icon_image.to_s %>
         <div class="game-info">
