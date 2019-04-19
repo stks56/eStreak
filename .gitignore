@@ -33,5 +33,5 @@
 # dotenv-rails
 /.env
 
-# macos用 .DSstore
-.DSstore
+# macos用
+.DS_Store
