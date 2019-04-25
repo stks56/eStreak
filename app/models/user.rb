@@ -1,10 +1,4 @@
 class User < ApplicationRecord
-  validates :name, {presence: true}
-  validates :email, {presence: true, uniqueness: true}
-  validates :password, {presence: true}
-
-  mount_uploader :image, ImageUploader
-
   has_many :posts, dependent: :destroy
   accepts_nested_attributes_for :posts
   has_many :likes, dependent: :destroy
@@ -12,5 +6,33 @@ class User < ApplicationRecord
   has_many :followers, dependent: :destroy
   accepts_nested_attributes_for :followers
 
-  has_secure_password
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :timeoutable, :omniauthable, omniauth_providers: [:twitter]
+
+  mount_uploader :image, ImageUploader
+
+  def remember_me
+    true
+  end
+
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.username = auth["info"]["nickname"]
+    end
+  end
+
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"]) do |user|
+        user.attributes = params
+      end
+    else
+      super
+    end
+  end
 end
