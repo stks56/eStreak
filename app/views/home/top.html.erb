@@ -6,7 +6,7 @@
     <%= link_to "新規登録", new_user_registration_path, class: "btn" %>
     <%= link_to "ログイン", new_user_session_path, class: "btn" %>
     <p>or</p>
-    <%= link_to " Twitterアカウントでログイン", users_auth_twitter_path, class: "fab fa-twitter btn" %>
-    <%= link_to(" Twitchアカウントでログイン", "/", {class: "fab fa-twitch btn"}) %>
+    <%= link_to " Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: "fab fa-twitter btn" %>
+    <%= link_to " Twitchアカウントでログイン", user_twitch_omniauth_authorize_path, class: "fab fa-twitch btn" %>
   </div>
 </div>

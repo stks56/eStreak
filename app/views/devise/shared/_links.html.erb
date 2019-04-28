@@ -1,21 +1,22 @@
-<%= link_to " Twitterアカウントでログイン", users_auth_twitter_path, class: "fab fa-twitter btn" %><br />
+<%= link_to " Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: "fab fa-twitter btn" %><br />
+<%= link_to " Twitterアカウントでログイン", user_twitch_omniauth_authorize_path, class: "fab fa-twitch btn" %><br />
 
 <%- if controller_name != 'sessions' %>
-  <%= link_to "ログインはこちらから", new_session_path(resource_name) %><br />
+  <%= link_to "アカウントをお持ちの方はこちら", new_user_session_path %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "新規登録はこちらから", new_registration_path(resource_name) %><br />
+  <%= link_to "新規登録はこちら", new_user_registration_path %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "パスワードをお忘れですか？", new_password_path(resource_name) %><br />
+  <%= link_to "パスワードをお忘れですか？", new_user_password_path %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+  <%= link_to "認証メールが届かない場合はこちら", new_user_confirmation_path %><br />
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+  <%= link_to "アカウントがロックされた場合はこちら", new_user_unlock_path %><br />
 <% end %>

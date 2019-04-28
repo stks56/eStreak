@@ -11,6 +11,8 @@ Devise.setup do |config|
   # config.secret_key = '63f25d30804d42767447c1b4a70fd709123500b72c066a9ceb37f53865427132ed09936efa509a053c009e225f2ecfd51edbcc06a040f449cf457672b34967c5'
 
   config.omniauth :twitter, ENV.fetch("TWITTER_API_KEY"), ENV.fetch("TWITTER_API_SECRET")
+  config.omniauth :twitch, ENV.fetch("TWITCH_ACCESS_TOKEN"), ENV.fetch("TWITCH_ACCESS_TOKEN_SECRET")
+  OmniAuth.config.logger = Rails.logger if Rails.env.development?
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
