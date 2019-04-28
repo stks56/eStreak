@@ -18,7 +18,7 @@
       </div>
       <div class="header-menus">
         <ul>
-          <% if @current_user %>
+          <% if user_signed_in? %>
             <li>
               <%= link_to("Games", "/games") %>
             </li>
@@ -34,12 +34,15 @@
             <li>
               <%= link_to("About", "/about") %>
             </li>
-            <%= link_to("/users/#{@current_user.id}") do %>
+            <%= link_to("/users/#{current_user.id}") do %>
               <div class="header-userinfo">
-                <%= image_tag @current_user.image.to_s %>
-                <%= @current_user.name %>
+                <%= image_tag current_user.image.to_s %>
+                <%= current_user.name %>
               </div>
             <% end %>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete  %>
+            </li>
           <% else %>
             <li>
               <%= link_to("Games", "/games") %>
@@ -51,21 +54,19 @@
               <%= link_to("新着記事", "/posts") %>
             </li>
             <li>
-              <%= link_to("新規登録", "/signup") %>
+              <%= link_to("新規登録", new_user_registration_path) %>
             </li>
             <li>
               <%= link_to("About", "/about") %>
             </li>
-            <%= link_to("/login") do %>
+            <%= link_to new_user_session_path do %>
               <div class="header-btn">ログイン</div>
             <% end %>
           <% end %>
         </ul>
       </div>
-      <% if flash[:notice] %>
-        <div class="flash">
-          <%= flash[:notice] %>
-        </div>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "flash #{key}") %>
       <% end %>
     </header>
     <%= yield %>

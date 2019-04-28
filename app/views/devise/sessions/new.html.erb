@@ -1,0 +1,22 @@
+<div class="main-wrapper">
+  <div class="user-new-container">
+    <h2>ログイン</h2>
+    <%= form_for(resource, as: resource_name, url: user_session_path) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "password" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "ログイン", class: "submit-btn" %>
+      </div>
+    <% end %>
+    <p>or</p>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

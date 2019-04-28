@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-before_action :authenticate_user, {only: [:create, :destroy]}
+before_action :authenticate_user!, {only: [:create, :destroy]}
 
   def index
     like_ranks = Like.group(:post_id).order(Arel.sql("count(post_id) desc")).limit(10).pluck(:post_id)

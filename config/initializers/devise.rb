@@ -8,8 +8,11 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '3a0d8042d66fa2dd0bd857335db7c3b47fb1db3a372a328be0063d565cdd71c782bcaab429c85af88e150a3eec7d4c18c51ce6a9f714d374811f4f504aec08d1'
+  # config.secret_key = '63f25d30804d42767447c1b4a70fd709123500b72c066a9ceb37f53865427132ed09936efa509a053c009e225f2ecfd51edbcc06a040f449cf457672b34967c5'
 
+  config.omniauth :twitter, ENV.fetch("TWITTER_API_KEY"), ENV.fetch("TWITTER_API_SECRET")
+  config.omniauth :twitch, ENV.fetch("TWITCH_ACCESS_TOKEN"), ENV.fetch("TWITCH_ACCESS_TOKEN_SECRET")
+  OmniAuth.config.logger = Rails.logger if Rails.env.development?
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -114,7 +117,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '326e6b21e5642d27c150b06c4bb3ee5aa3b5950f37b75aea36e46ffd9418df0c7eb92227c13e649044b5e338679cd3848adb8bda4b28d03baf87007338587a70'
+  # config.pepper = '53f29841f48b779a2534ffbad223190384b486af481091db357ea1a92f898d7a0847e70371b7c090e037b347a9dd4defc6b39d9a572fe4005a9bb873fbf1ad48'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -176,7 +179,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  # config.timeout_in = 30.minutes
+  config.timeout_in = 12.hours
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.

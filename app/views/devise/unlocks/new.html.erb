@@ -1,0 +1,19 @@
+<div class="main-wrapper">
+  <div class="user-new-container">
+    <h2>アカウントロック解除</h2>
+
+    <%= form_for(resource, as: resource_name, url: user_unlock_path, html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "アカウントのロック解除をリクエストする" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
