@@ -1,35 +1,41 @@
 <div class="main-wrapper">
   <div class="user-show-container">
-    <%= image_tag @user.image.to_s %>
-    <h3><%= @user.name %></h3>
-    <div class="user-show-menu">
-      <% if @current_user && @current_user.id == @user.id %>
-        <%= link_to("編集", "/users/#{@user.id}/edit") %>
-        <%= link_to("ログアウト", "/logout", {method: "post"}) %>
-      <% end %>
-    </div>
-  </div>
-  <div class="container">
-    <h2>このユーザーの投稿記事</h2>
-    <div class="container2">
-      <div class="item-list">
+    <div class="user-show-left">
+      <%= image_tag @user.image.url %>
+      <h3><%= @user.name %></h3>
+      <div class="user-show-menu">
+        <% if current_user.id == @user.id %>
+          <%= link_to("編集", "/users/#{@user.id}/edit") %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <% end %>
       </div>
-      <% @user.posts.each do |post| %>
-        <%= link_to("/posts/#{post.id}") do %>
-          <div class="post-container">
-            <%= image_tag post.user.image.to_s %>
-            <div class="post-container2">
-              <h3><%= post.title %></h3>
-              <span>@<%= post.user.name %></span>
-              <div class="post-data">
-                <span class="fas fa-heart"><%= post.likes.count %></span>
-                <span>カテゴリー：<%= post.game.name.gsub("_", " ") %></span>
-                <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+      <div class="follower-container">
+        <h2>フォロー</h2>
+        <h2>フォロワー</h2>
+      </div>
+    </div>
+    <div class="user-show-main">
+      <h2>このユーザーの投稿記事</h2>
+      <div class="container2">
+        <div class="item-list">
+        </div>
+        <% @user.posts.each do |post| %>
+          <%= link_to("/posts/#{post.id}") do %>
+            <div class="post-container">
+              <%= image_tag post.user.image.to_s %>
+              <div class="post-container2">
+                <h3><%= post.title %></h3>
+                <span>@<%= post.user.name %></span>
+                <div class="post-data">
+                  <span class="fas fa-heart"><%= post.likes.count %></span>
+                  <span>カテゴリー：<%= post.game.name.gsub("_", " ") %></span>
+                  <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
