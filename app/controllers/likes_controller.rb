@@ -9,7 +9,7 @@ before_action :authenticate_user!, {only: [:create, :destroy]}
   def create
     like = Like.new(
       post_id: params[:post_id],
-      user_id: @current_user.id,
+      user_id: current_user.id,
       game_id: Post.find(params[:post_id]).game_id
     )
     if like.save
@@ -24,7 +24,7 @@ before_action :authenticate_user!, {only: [:create, :destroy]}
   def destroy
     like = Like.find_by(
       post_id: params[:post_id],
-      user_id: @current_user.id
+      user_id: current_user.id
     )
     if like.destroy
       flash[:notice] = "この記事のいいね！を外しました..."

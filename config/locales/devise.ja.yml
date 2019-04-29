@@ -66,5 +66,6 @@ ja:
       user:
         name: アカウント名(ユーザーネーム)
         password: パスワード
-        password_confirmation: パスワード確認
+        password_confirmation: パスワードをもう一度入力してください
         email: メールアドレス
+        current_password: 現在のパスワード

@@ -19,7 +19,7 @@ class PostsController < ApplicationController
       title: params[:title],
       content: params[:content],
       game_id: params[:game_id],
-      user_id: @current_user.id
+      user_id: current_user.id
     )
     if @post.save
       flash[:notice] = "記事を投稿しました"
@@ -54,7 +54,7 @@ class PostsController < ApplicationController
 
   def ensure_correct_user
     @post = Post.find_by(id: params[:post_id])
-    if @current_user.id != @post.user_id
+    if current_user.id != @post.user_id
       flash[:notice] = "権限がありません"
       redirect_to("/")
     end
