@@ -69,3 +69,4 @@ ja:
         password_confirmation: パスワードをもう一度入力してください
         email: メールアドレス
         current_password: 現在のパスワード
+        image: 現在のユーザー画像

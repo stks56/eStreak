@@ -10,6 +10,12 @@
         <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
       </div>
 
+      <%= image_tag resource.image.url %>
+      <div class="field">
+        <%= f.label :image %><br />
+        <%= f.file_field :image, autocomplete: "image" %>
+      </div>
+
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autocomplete: "email" %>
