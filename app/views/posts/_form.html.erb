@@ -1,0 +1,28 @@
+<div class="form">
+  <% post.errors.full_messages.each do |message| %>
+    <div class="error">
+      <%= message %>
+    </div>
+  <% end %>
+  <%= form_with(model: post, local: true) do |f| %>
+
+    <div class="title-field">
+      <%= f.label :title %><br />
+      <%= f.text_field  :title, class: "title"%>
+    </div>
+
+    <div class="game-field">
+      <%= f.label :game_id %>
+      <%= f.collection_select :game_id, Game.all, :id, :name, prompt: true %>
+    </div>
+
+    <div class="content-field">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "投稿", class: "submit-btn" %>
+    </div>
+  <% end %>
+</div>

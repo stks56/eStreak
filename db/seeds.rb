@@ -7,16 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(
   name: "Alice",
-  email: "a",
-  password: "a",
-  image: File.open("./db/data/user/image/default.jpg"),
+  email: "a@example.com",
+  password: "password",
 )
 
 User.create!(
   name: "Bub",
-  email: "b",
-  password: "b",
-  image: File.open("./db/data/user/image/default.jpg"),
+  email: "b@example.com",
+  password: "password",
 )
 
 Game.create!(name: "League of Legends")
