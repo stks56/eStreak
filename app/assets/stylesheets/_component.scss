@@ -1,0 +1,8 @@
+// button
+@mixin red-btn {
+  background-color: $color-red;
+  color: white;
+  line-height: 40px;
+  padding: 0 15px;
+  margin: 5px;
+}
