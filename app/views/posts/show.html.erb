@@ -29,7 +29,7 @@
         <ul class="right">
           <% if current_user.id == @post.user_id %>
             <li><%= link_to "編集", edit_post_path(@post) %></li>
-            <li><%= link_to "削除", @post, method: "delete" %></li>
+            <li><%= link_to "削除", @post, method: "delete", data: { confirm: "#{@post.title}を削除します。よろしいですか？" } %></li>
           <% end %>
         </ul>
       </div>
