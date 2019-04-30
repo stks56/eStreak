@@ -64,7 +64,7 @@ ja:
   activerecord:
     attributes:
       user:
-        name: アカウント名(ユーザーネーム)
+        name: ユーザーネーム
         password: パスワード
         password_confirmation: パスワードをもう一度入力してください
         email: メールアドレス

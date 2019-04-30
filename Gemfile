@@ -47,6 +47,8 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'omniauth-twitter', '~> 1.4'
 gem 'omniauth-twitch', '~> 1.0'
 gem 'rmagick', '~> 3.1'
+gem 'redcarpet', '~> 3.4'
+gem 'rouge', '~> 3.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

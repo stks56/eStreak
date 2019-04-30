@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(id: params[:id])
   end
 
   def new
@@ -15,12 +15,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(
-      title: params[:title],
-      content: params[:content],
-      game_id: params[:game_id],
-      user_id: current_user.id
-    )
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
     if @post.save
       flash[:notice] = "記事を投稿しました"
       redirect_to("/posts")
@@ -30,14 +26,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find_by(id: params[:post_id])
   end
 
   def update
-    @post = Post.find_by(id: params[:post_id])
-    @post.title = params[:title]
-    @post.content = params[:content]
-    if @post.save
+    if @post.update(post_params)
       flash[:notice] = "記事を編集しました"
       redirect_to("/posts/#{@post.id}")
     else
@@ -46,18 +38,22 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(id: params[:id])
     @post.destroy
     flash[:notice] = "記事を削除しました"
     redirect_to("/posts")
   end
 
   def ensure_correct_user
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(id: params[:id])
     if current_user.id != @post.user_id
       flash[:notice] = "権限がありません"
       redirect_to("/")
     end
   end
 
+  private
+  def post_params
+    params.require(:post).permit(:title, :game_id, :content)
+  end
 end
