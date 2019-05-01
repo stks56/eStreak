@@ -5,7 +5,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+// top
 .top-container {
   background: url("top.jpg") center center/ cover;
   flex: 1;
@@ -53,4 +53,28 @@
   .fa-twitch {
     background-color: $color-twitch;
   }
+}
+
+// about
+.about-container {
+  border: solid 1px $color-whitegray;
+  background-color: white;
+  text-align: center;
+  margin: 30px auto;
+  width: 800px;
+  box-shadow: 0 0 8px black;
+  padding: 50px;
+}
+
+.about-container h3 {
+  font-size: 36px;
+  margin-bottom: 50px;
+  border-bottom: solid 1px $color-whitegray;
+  padding-bottom: 5px;
+}
+
+.about-container p {
+  line-height: 20px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
