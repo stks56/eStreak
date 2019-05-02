@@ -10,7 +10,8 @@ describe '記事管理機能', type: :system do
     it { expect(page).to have_content '最初の記事のタイトル' }
   end
 
-  shared_examples_for 'ユーザーAが作成した記事の内容が表示される' do
+  shared_examples_for 'ユーザーAが作成した記事の詳細が表示される' do
+    it { expect(page).to have_content 'ゲームA' }
     it { expect(page).to have_content '最初の記事の内容' }
   end
 
@@ -19,9 +20,9 @@ describe '記事管理機能', type: :system do
       let(:login_user) { user_a }
 
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit posts_path
       end
@@ -33,9 +34,9 @@ describe '記事管理機能', type: :system do
       let(:login_user) { user_b }
 
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit posts_path
       end
@@ -57,30 +58,30 @@ describe '記事管理機能', type: :system do
       let(:login_user) { user_a }
 
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit posts_path
         click_link '最初の記事のタイトル'
       end
 
-      it_behaves_like 'ユーザーAが作成した記事の内容が表示される'
+      it_behaves_like 'ユーザーAが作成した記事の詳細が表示される'
     end
 
     context 'ユーザーBがログインしているとき' do
       let(:login_user) { user_b }
 
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit posts_path
         click_link '最初の記事のタイトル'
       end
 
-      it_behaves_like 'ユーザーAが作成した記事の内容が表示される'
+      it_behaves_like 'ユーザーAが作成した記事の詳細が表示される'
     end
 
     context 'ログインしていないとき' do
@@ -89,7 +90,7 @@ describe '記事管理機能', type: :system do
         click_link '最初の記事のタイトル'
       end
 
-      it_behaves_like 'ユーザーAが作成した記事の内容が表示される'
+      it_behaves_like 'ユーザーAが作成した記事の詳細が表示される'
     end
   end
 
@@ -100,9 +101,9 @@ describe '記事管理機能', type: :system do
 
     context 'ユーザーがログインしているとき' do
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit 'posts/new'
       end
@@ -111,11 +112,12 @@ describe '記事管理機能', type: :system do
         expect(page).to have_content '投稿する'
       end
 
-      context '記事投稿画面でタイトルと内容を入力したとき' do
+      context '記事投稿画面でタイトルとゲーム名と内容を入力したとき' do
         before do
           visit 'posts/new'
-          fill_in 'title', with: post_title
-          fill_in 'content', with: post_content
+          fill_in 'post[title]', with: post_title
+          select 'ゲームA', from: 'post[game_id]'
+          fill_in 'post[content]', with: post_content
           click_button '投稿'
         end
 
@@ -127,27 +129,44 @@ describe '記事管理機能', type: :system do
         end
       end
 
-      context '記事投稿画面でタイトルだけを入力したとき' do
+      context '記事投稿画面でタイトルが未入力のとき' do
         before do
           visit 'posts/new'
-          fill_in 'title', with: post_title
+          fill_in 'post[title]', with: ''
+          select 'ゲームA', from: 'post[game_id]'
+          fill_in 'post[content]', with: post_content
           click_button '投稿'
         end
 
         it '投稿が失敗し、エラーメッセージが表示される' do
-          expect(page).to have_content 'Contentを入力してください'
+          expect(page).to have_content 'タイトルを入力してください'
         end
       end
 
-      context '記事投稿画面で内容だけを入力したとき' do
+      context '記事投稿画面で内容が未入力のとき' do
         before do
           visit 'posts/new'
-          fill_in 'content', with: post_content
+          fill_in 'post[title]', with: post_title
+          select 'ゲームA', from: 'post[game_id]'
+          fill_in 'post[content]', with: ''
           click_button '投稿'
         end
 
         it '投稿が失敗し、エラーメッセージが表示される' do
-          expect(page).to have_content 'Titleを入力してください'
+          expect(page).to have_content '本文を入力してください'
+        end
+      end
+
+      context '記事投稿画面でゲーム名を選択しなかったとき' do
+        before do
+          visit 'posts/new'
+          fill_in 'post[title]', with: post_title
+          fill_in 'post[content]', with: post_content
+          click_button '投稿'
+        end
+
+        it '投稿が失敗し、エラーメッセージが表示される' do
+          expect(page).to have_content 'ゲームを入力してください'
         end
       end
     end
@@ -159,9 +178,9 @@ describe '記事管理機能', type: :system do
 
       it '記事投稿画面にアクセスできず、ログイン画面にリダイレクトする' do
         within '.flash' do
-          expect(page).to have_content 'ログインが必要です'
+          expect(page).to have_content 'ログインまたは登録が必要です。'
         end
-        expect(current_path).to eq(login_path)
+        expect(current_path).to eq(new_user_session_path)
       end
     end
   end
@@ -182,9 +201,9 @@ describe '記事管理機能', type: :system do
       let(:login_user) { user_a }
 
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit 'posts'
         click_link '最初の記事のタイトル'
@@ -202,9 +221,9 @@ describe '記事管理機能', type: :system do
       context '記事編集画面でタイトルと内容を入力したとき' do
         before do
           click_link '編集'
-          fill_in 'title', with: post_title
-          fill_in 'content', with: post_content
-          click_button '編集'
+          fill_in 'post[title]', with: post_title
+          fill_in 'post[content]', with: post_content
+          click_button '投稿'
         end
 
         it '編集が成功し、記事詳細画面へリダイレクトされる' do
@@ -216,29 +235,29 @@ describe '記事管理機能', type: :system do
         end
       end
 
-      context '記事編集画面でタイトルだけを入力したとき' do
+      context '記事編集画面でタイトルが未入力のとき' do
         before do
           click_link '編集'
-          fill_in 'title', with: post_title
-          fill_in 'content', with: ''
-          click_button '編集'
+          fill_in 'post[title]', with: ''
+          fill_in 'post[content]', with: post_content
+          click_button '投稿'
         end
 
         it '投稿が失敗し、エラーメッセージが表示される' do
-          expect(page).to have_content 'Contentを入力してください'
+          expect(page).to have_content 'タイトルを入力してください'
         end
       end
 
-      context '記事編集画面で内容だけを入力したとき' do
+      context '記事編集画面で内容が未入力のとき' do
         before do
           click_link '編集'
-          fill_in 'title', with: ''
-          fill_in 'content', with: post_content
-          click_button '編集'
+          fill_in 'post[title]', with: post_title
+          fill_in 'post[content]', with: ''
+          click_button '投稿'
         end
 
         it '投稿が失敗し、エラーメッセージが表示される' do
-          expect(page).to have_content 'Titleを入力してください'
+          expect(page).to have_content '本文を入力してください'
         end
       end
     end
@@ -247,9 +266,9 @@ describe '記事管理機能', type: :system do
       let(:login_user) { user_b }
 
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit 'posts'
         click_link '最初の記事のタイトル'
@@ -277,9 +296,9 @@ describe '記事管理機能', type: :system do
       let(:login_user) { user_a }
 
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit 'posts'
         click_link '最初の記事のタイトル'
@@ -289,9 +308,10 @@ describe '記事管理機能', type: :system do
         expect(page).to have_content '削除'
       end
 
-      context '削除ボタンをクリックしたとき' do
+      context '削除ボタンをクリックし、確認ダイアログでOKをクリックする' do
         before do
           click_link '削除'
+          page.accept_confirm '最初の記事のタイトルを削除します。よろしいですか？'
         end
 
         xit '記事が削除され、記事一覧表示画面にリダイレクトされる' do
@@ -308,9 +328,9 @@ describe '記事管理機能', type: :system do
       let(:login_user) { user_b }
 
       before do
-        visit login_path
-        fill_in 'email', with: login_user.email
-        fill_in 'password', with: login_user.password
+        visit new_user_session_path
+        fill_in 'user[email]', with: login_user.email
+        fill_in 'user[password]', with: login_user.password
         click_button 'ログイン'
         visit 'posts'
         click_link '最初の記事のタイトル'
