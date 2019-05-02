@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: ユーザーネーム
+        password: パスワード
+        password_confirmation: パスワードをもう一度入力してください
+        email: メールアドレス
+        current_password: 現在のパスワード
+        image: 現在のユーザー画像
+      post:
+        title: タイトル
+        game: ゲーム
+        content: 本文
+        game_id: ゲーム
