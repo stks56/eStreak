@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-    - image: ruby:2.4.0
+    - image: stks56/estreak:latest
       environment:
         RAILS_ENV: test
         MYSQL_HOST: 127.0.0.1
