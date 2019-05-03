@@ -30,7 +30,7 @@ jobs:
         - ./vendor/bundle
         key: v1-dependencies-{{ checksum "Gemfile.lock" }}
     # Database setup
-    - run: sudo chmod 777 /var/lib/mysql/mysql.sock
+    - run: chmod 777 /var/lib/mysql/mysql.sock
     - run: rm ./config/database.yml
     - run: mv ./config/database.yml.ci ./config/database.yml
     - run:
