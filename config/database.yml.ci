@@ -4,7 +4,7 @@ test:
   port: 3306
   pool: 5
   timeout: 10000
-  password: ''
   socket: /var/lib/mysql/mysql.sock
-  database: test
+  database: eStreak_test
   username: root
+  password: ''
