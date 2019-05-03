@@ -52,6 +52,7 @@ test:
 #
 production:
   <<: *default
+  host: <% ENV['RDS_MYSQL_ENDPOINT'] %>
   database: eStreak_production
   username: eStreak
   password: <%= ENV['ESTREAK_DATABASE_PASSWORD'] %>
