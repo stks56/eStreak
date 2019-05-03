@@ -40,9 +40,6 @@
                 <%= current_user.name.truncate(20) %>
               </div>
             <% end %>
-            <li>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete  %>
-            </li>
           <% else %>
             <li>
               <%= link_to("Games", "/games") %>
