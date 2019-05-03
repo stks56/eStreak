@@ -9,7 +9,7 @@ jobs:
         MYSQL_USERNAME: 'root'
         MYSQL_PASSWORD: ''
         MYSQL_PORT: 3306
-    - image: mysql:5.6.43
+    - image: mysql:5.7
       environment:
         MYSQL_DATABASE: eStreak_test
         MYSQL_ALLOW_EMPTY_PASSWORD: true
