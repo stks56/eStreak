@@ -36,7 +36,7 @@
     <% else %>
       <div class="post-show-menu">
         <ul class="left">
-          <%= link_to("/login") do %>
+          <%= link_to new_user_session_path do %>
             <li class="far fa-heart"><%= @post.likes.count %> ※いいねをするにはログインが必要です</li>
           <% end %>
         </ul>
