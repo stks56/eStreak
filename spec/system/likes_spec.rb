@@ -17,7 +17,7 @@ describe 'いいね機能', type: :system do
       click_link '最初の記事のタイトル'
     end
 
-    it 'いいねするが表示され、クリックするといいねができる' do
+    xit 'いいねするが表示され、クリックするといいねができる' do
       expect(page).to have_content 'いいねする！'
       click_link 'いいねする！'
       within '.flash' do
@@ -29,7 +29,7 @@ describe 'いいね機能', type: :system do
       click_link 'いいねする！'
     end
 
-    it 'いいねした！が表示され、クリックするといいねが外れる' do
+    xit 'いいねした！が表示され、クリックするといいねが外れる' do
       expect(page).to have_content 'いいねした！'
       click_link 'いいねした！'
       within '.flash' do

@@ -1,7 +1,11 @@
 test:
+  host: <%= ENV['MYSQL_HOST'] %>
   adapter: mysql2
   encoding: utf8
+  port: 3306
   pool: 5
   timeout: 10000
-  database: test
-  username: ubuntu
+  socket: /var/lib/mysql/mysql.sock
+  database: eStreak_test
+  username: root
+  password: ''
