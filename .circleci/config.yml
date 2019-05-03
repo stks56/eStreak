@@ -35,7 +35,7 @@ jobs:
     - run:
         name: Prepare db
         command: |
-          bundle exec rake db:create db:schema:load --trace
+          bundle exec rake db:create db:schema:load --trace RAILS_ENV=test
     # run tests!
     - run:
         name: Run rspec
