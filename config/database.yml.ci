@@ -1,33 +1,11 @@
-default: &default
+test:
+  host: <%= ENV['MYSQL_HOST'] %>
   adapter: mysql2
   encoding: utf8
   port: 3306
   pool: 5
-  timeout: 5000
-  url: <% ENV['DATABASE_URL']%>
-  username: root
-  password:
+  timeout: 10000
   socket: /var/lib/mysql/mysql.sock
-
-development:
-  <<: *default
-  database: eStreak_development
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-  <<: *default
   database: eStreak_test
-
-# 
-# test:
-#   adapter: mysql2
-#   encoding: utf8
-#   port: 3306
-#   pool: 5
-#   timeout: 10000
-#   socket: /var/lib/mysql/mysql.sock
-#   database: eStreak_test
-#   username: root
-#   password: ''
+  username: root
+  password: ''
