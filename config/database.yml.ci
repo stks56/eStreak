@@ -4,4 +4,4 @@ test:
   pool: 5
   timeout: 10000
   database: test
-  username: ubuntu
+  username: circlecitest
