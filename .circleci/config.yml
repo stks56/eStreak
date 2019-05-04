@@ -1,52 +1,122 @@
 version: 2.1
 jobs:
-  build:
+  checkout_code:
     docker:
-    - image: stks56/estreak:latest
-      environment:
-        RAILS_ENV: test
-        MYSQL_HOST: 127.0.0.1
-        MYSQL_USERNAME: 'root'
-        MYSQL_PASSWORD: ''
-        MYSQL_PORT: 3306
-    - image: mysql:5.7
-      environment:
-        MYSQL_DATABASE: eStreak_test
-        MYSQL_ALLOW_EMPTY_PASSWORD: true
-        MYSQL_ROOT_HOST: '%'
+      - image: stks56/estreak:latest
     working_directory: ~/eStreak
     steps:
-    - checkout
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "Gemfile.lock" }}
-        - v1-dependencies-
-    - run:
-        name: install dependencies
-        command: |
-          bundle install --jobs=4 --retry=3 --path vendor/bundle
-    - save_cache:
-        paths:
-        - ./vendor/bundle
-        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-    # Database setup
-    - run: rm ./config/database.yml
-    - run: mv ./config/database.yml.ci ./config/database.yml
-    - run:
-        name: Prepare db
-        command: |
-          bundle exec rake db:create db:schema:load --trace
-    # run tests!
-    - run:
-        name: Run rspec
-        command: |
-          mkdir /tmp/test-results
-          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-          bundle exec rspec --format progress --color --format documentation
+      - checkout
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/eStreak
+  test:
+    docker:
+      - image: stks56/estreak:latest
+        environment:
+          RAILS_ENV: test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_USERNAME: 'root'
+          MYSQL_PASSWORD: ''
+          MYSQL_PORT: 3306
+      - image: mysql:5.7
+        environment:
+          MYSQL_DATABASE: eStreak_test
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_HOST: '%'
+    working_directory: ~/eStreak
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+          - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      # Database setup
+      - run: rm ./config/database.yml
+      - run: mv ./config/database.yml.ci ./config/database.yml
+      - run:
+          name: Prepare db
+          command: |
+            bundle exec rake db:create db:schema:load --trace
+      # run tests!
+      - run:
+          name: Run rspec
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format progress --color --format documentation
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
 
-    # collect reports
-    - store_test_results:
-        path: /tmp/test-results
-    - store_artifacts:
-        path: /tmp/test-results
-        destination: test-results
+  deploy:
+    docker:
+      - image: circleci/python
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: install aws
+          command: |
+            sudo pip install awscli
+            aws --version
+      - run:
+          name: Install ecs-deploy
+          command: |
+            curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee -a /usr/bin/ecs-deploy
+            sudo chmod +x /usr/bin/ecs-deploy
+      - run:
+          name: Install jq
+          command: sudo apt-get install -y jq
+      - run:
+          name: "Log in to AWS ECR"
+          command: eval $(aws ecr get-login --no-include-email --region ap-northeast-1)
+      - run:
+          name: "Build & Push Docker Image"
+          command: |
+            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1 .
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
+
+      - run:
+          name: "DB Migrate"
+          command: |
+            aws ecs run-task \
+              --region ap-northeast-1 \
+              --cluster eStreak-cluster \
+              --task-definition estreak_app_task \
+              --overrides file://ecs/run_task_db_migrate.json
+      - run:
+          name: "Sevice deploy"
+          environment:
+          command: |
+            ecs-deploy --cluster eStreak-cluster --service_name eStreak-app-service \
+              --region ap-northeast-1 --timeout 240 \
+              --image $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
+
+workflows:
+  version: 2.1
+  test_and_deploy:
+    jobs:
+      - checkout_code
+      - test:
+          requires:
+            - checkout_code
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
