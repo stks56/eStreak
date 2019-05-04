@@ -94,8 +94,6 @@ jobs:
           name: "DB Migrate"
           command: |
             aws ecs run-task \
-              --aws-access-key $AWS_ACCESS_KEY \
-              --aws-secret-key $AWS_SECRET_KEY \
               --region ap-northeast-1 \
               --cluster eStreak-cluster \
               --task-definition estreak_app_task \
@@ -104,7 +102,7 @@ jobs:
           name: "Sevice deploy"
           environment:
           command: |
-            ecs-deploy --cluster eStreak-cluster --service_name eStreak-app-service \
+            ecs-deploy --cluster eStreak-cluster --service_name eStreak-app-service --task-definition estreak_app_task \
               --region ap-northeast-1 --timeout 240 \
               --image $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
 
