@@ -102,9 +102,9 @@ jobs:
           name: "Sevice deploy"
           environment:
           command: |
-            ecs-deploy --cluster eStreak-cluster --service_name eStreak-app-service --task-definition estreak_app_task \
-              --region ap-northeast-1 --timeout 240 \
-              --image $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
+            ecs-deploy -c eStreak-cluster -n eStreak-app-service -d estreak_app_task \
+              -r ap-northeast-1 -t 240 \
+              -i $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
 
 workflows:
   version: 2.1
