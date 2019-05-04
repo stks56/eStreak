@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   checkout_code:
     docker:
@@ -106,17 +106,17 @@ jobs:
               --region ap-northeast-1 --timeout 240 \
               --image $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
 
-  workflows:
-    version: 2.1
-    test_and_deploy:
-      jobs:
-        - checkout_code
-        - test:
-            requires:
-              - checkout_code
-        - deploy:
-            requires:
-              - test
-            filters:
-              branches:
-                only: master
+workflows:
+  version: 2.1
+  test_and_deploy:
+    jobs:
+      - checkout_code
+      - test:
+          requires:
+            - checkout_code
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
