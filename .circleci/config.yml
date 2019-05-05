@@ -102,7 +102,7 @@ jobs:
           name: "Sevice deploy"
           environment:
           command: |
-            ecs-deploy -c eStreak-cluster -n eStreak-app-service -d estreak_app_task \
+            ecs-deploy -c eStreak-cluster -n eStreak-app-service \
               -r ap-northeast-1 -t 240 \
               -i $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
 
