@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   checkout_code:
     docker:
-      - image: stks56/estreak:latest
+      - image: stks56/estreak_pro:latest
     working_directory: ~/eStreak
     steps:
       - checkout
@@ -12,7 +12,7 @@ jobs:
             - ~/eStreak
   test:
     docker:
-      - image: stks56/estreak:latest
+      - image: stks56/estreak_pro:latest
         environment:
           RAILS_ENV: test
           MYSQL_HOST: 127.0.0.1
