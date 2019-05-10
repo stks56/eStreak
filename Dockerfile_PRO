@@ -28,6 +28,9 @@ COPY . $APP_ROOT
 
 EXPOSE  3000
 
+ARG AWS_S3_ACCESS_KEY_ID
+ARG AWS_S3_SECRET_ACCESS_KEY
+
 RUN npm install
 RUN npm install yarn -g
 RUN npm install n -g
