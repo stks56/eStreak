@@ -5,10 +5,10 @@ ENV APP_ROOT /usr/src/eStreak
 WORKDIR $APP_ROOT
 
 RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get update
+RUN apt-get install -y \
     nodejs \
-    vi \
+    npm \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
@@ -27,3 +27,15 @@ RUN \
 COPY . $APP_ROOT
 
 EXPOSE  3000
+
+RUN npm install
+RUN npm install yarn -g
+RUN npm install n -g
+
+RUN n 10.15.3
+
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
+RUN RAILS_ENV=production bundle exec rake assets:precompile
+RUN rm -f tmp/pids/server.pid
+CMD ["bundle", "exec", "rails", "s", "puma", "-b", "0.0.0.0", "-p", "3000", "-e", "production"]
