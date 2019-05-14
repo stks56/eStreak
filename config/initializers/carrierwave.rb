@@ -9,9 +9,9 @@ CarrierWave.configure do |config|
     config.fog_directory  = 'estreak-bucket'
     config.fog_credentials = {
       provider: 'AWS',
-      aws_access_key_id: Rails.application.credentials.aws[:s3_access_key_id],
-      aws_secret_access_key: Rails.application.credentials.aws[:s3_secret_access_key],
-      region: Rails.application.credentials.aws[:s3_region],
+      aws_access_key_id: ENV['AWS_S3_ACCESS_KEY_ID'],
+      aws_secret_access_key: ENV['AWS_S3_SECRET_ACCESS_KEY'],
+      region: ENV['AWS_DEFAULT_REGION'],
       path_style: true
     }
   else
