@@ -61,52 +61,50 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-orbs:
-  aws-ecr: circleci/aws-ecr@0.0.2
-  aws-ecs: circleci/aws-ecs@0.0.8
-  # deploy:
-  #   docker:
-  #     - image: circleci/python
-  #   steps:
-  #     - checkout
-  #     - setup_remote_docker
-  #     - run:
-  #         name: install aws
-  #         command: |
-  #           sudo pip install awscli
-  #           aws --version
-  #     - run:
-  #         name: Install ecs-deploy
-  #         command: |
-  #           curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee -a /usr/bin/ecs-deploy
-  #           sudo chmod +x /usr/bin/ecs-deploy
-  #     - run:
-  #         name: Install jq
-  #         command: sudo apt-get install -y jq
-  #     - run:
-  #         name: "Log in to AWS ECR"
-  #         command: eval $(aws ecr get-login --no-include-email --region ${AWS_DEFAULT_REGION})
-  #     - run:
-  #         name: "Build & Push Docker Image"
-  #         command: |
-  #           docker build -t $AWS_ACCOUNT_ID.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/estreak_app_repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1 -f Dockerfile_PRO .
-  #           docker push $AWS_ACCOUNT_ID.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
-  #
-  #     - run:
-  #         name: "DB Migrate"
-  #         command: |
-  #           aws ecs run-task \
-  #             --region ${AWS_DEFAULT_REGION} \
-  #             --cluster eStreak-cluster \
-  #             --task-definition estreak_app_task \
-  #             --overrides file://ecs/run_task_db_migrate.json
-  #     - run:
-  #         name: "Sevice deploy"
-  #         environment:
-  #         command: |
-  #           ecs-deploy -c eStreak-cluster -n eStreak_app_service \
-  #             -r ${AWS_DEFAULT_REGION} -t 240 \
-  #             -i $AWS_ACCOUNT_ID.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
+
+  deploy:
+    docker:
+      - image: circleci/python
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: install aws
+          command: |
+            sudo pip install awscli
+            aws --version
+      - run:
+          name: Install ecs-deploy
+          command: |
+            curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee -a /usr/bin/ecs-deploy
+            sudo chmod +x /usr/bin/ecs-deploy
+      - run:
+          name: Install jq
+          command: sudo apt-get install -y jq
+      - run:
+          name: "Log in to AWS ECR"
+          command: eval $(aws ecr get-login --no-include-email --region ap-northeast-1)
+      - run:
+          name: "Build & Push Docker Image"
+          command: |
+            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1 -f Dockerfile_PRO --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY .
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
+
+      - run:
+          name: "DB Migrate"
+          command: |
+            aws ecs run-task \
+              --region ap-northeast-1 \
+              --cluster eStreak-cluster \
+              --task-definition estreak_app_task \
+              --overrides file://ecs/run_task_db_migrate.json
+      - run:
+          name: "Sevice deploy"
+          environment:
+          command: |
+            ecs-deploy -c eStreak-cluster -n eStreak_app_service \
+              -r ap-northeast-1 -t 240 \
+              -i $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
 
 workflows:
   version: 2.1
@@ -116,31 +114,9 @@ workflows:
       - test:
           requires:
             - checkout_code
-      - aws-ecr/build_and_push_image:
+      - deploy:
           requires:
             - test
           filters:
             branches:
-                only: master
-          account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-          repo: estreak_app_repo
-          region: ${AWS_DEFAULT_REGION}
-          tag: "${CIRCLE_SHA1}"
-      - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build_and_push_image
-          filters:
-            branches:
-                only: master
-          aws-region: ${AWS_DEFAULT_REGION}
-          family: eStreak_app_service
-          cluster-name: eStreak-cluster
-          container-image-name-updates: "container=eStreak_app_service,tag=${CIRCLE_SHA1}"
-
-
-      # - deploy:
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: master
+              only: master
