@@ -37,7 +37,8 @@ RUN n 10.15.3
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 ARG RAILS_MASTER_KEY
-ENV RAILS_MASTER_KEY = $RAILS_MASTER_KEY
+RUN echo $RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY $RAILS_MASTER_KEY
 
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 RUN rm -f tmp/pids/server.pid
