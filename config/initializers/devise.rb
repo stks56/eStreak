@@ -9,9 +9,14 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '63f25d30804d42767447c1b4a70fd709123500b72c066a9ceb37f53865427132ed09936efa509a053c009e225f2ecfd51edbcc06a040f449cf457672b34967c5'
+  if Rails.env.development?
+    config.omniauth :twitter, ENV.fetch("TWITTER_API_KEY"), ENV.fetch("TWITTER_API_SECRET")
+    config.omniauth :twitch, ENV.fetch("TWITCH_ACCESS_TOKEN"), ENV.fetch("TWITCH_ACCESS_TOKEN_SECRET")
+  elsif Rails.env.production?
+    config.omniauth :twitter, Rails.application.credentials.api_key[:twitter_api_key], Rails.application.credentials.api_key[:twitter_api_secret]
+    config.omniauth :twitch, Rails.application.credentials.api_key[:twitch_access_token], Rails.application.credentials.api_key[:twitch_access_token_secret]
+  end
 
-  config.omniauth :twitter, ENV.fetch("TWITTER_API_KEY"), ENV.fetch("TWITTER_API_SECRET")
-  config.omniauth :twitch, ENV.fetch("TWITCH_ACCESS_TOKEN"), ENV.fetch("TWITCH_ACCESS_TOKEN_SECRET")
   OmniAuth.config.logger = Rails.logger if Rails.env.development?
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.

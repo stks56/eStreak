@@ -9,6 +9,7 @@ RUN apt-get update
 RUN apt-get install -y \
     nodejs \
     npm \
+    vim \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
@@ -37,8 +38,12 @@ RUN n 10.15.3
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 ARG RAILS_MASTER_KEY
-RUN echo $RAILS_MASTER_KEY
+ARG RDS_MYSQL_ENDPOINT
+ARG ESTREAK_DATABASE_PASSWORD
+
 ENV RAILS_MASTER_KEY $RAILS_MASTER_KEY
+ENV RDS_MYSQL_ENDPOINT $RDS_MYSQL_ENDPOINT
+ENV ESTREAK_DATABASE_PASSWORD $ESTREAK_DATABASE_PASSWORD
 
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 RUN rm -f tmp/pids/server.pid

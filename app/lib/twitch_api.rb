@@ -2,7 +2,11 @@ require "net/http"
 require "uri"
 
 class TwitchApi
-  TWITCH_ACCESS_TOKEN = ENV.fetch("TWITCH_ACCESS_TOKEN")
+  if Rails.env.development?
+    TWITCH_ACCESS_TOKEN = ENV.fetch("TWITCH_ACCESS_TOKEN")
+  elsif Rails.env.production?
+    TWITCH_ACCESS_TOKEN = Rails.application.credentials.api_key[:twitch_access_token]
+  end
 
   def self.get_json(location, limit = 10)
     raise ArgumentError, 'too many HTTP redirects' if limit == 0
