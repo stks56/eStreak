@@ -30,20 +30,18 @@ COPY . $APP_ROOT
 EXPOSE  3000
 
 RUN npm install
-RUN npm install yarn -g
+
 RUN npm install n -g
-
 RUN n 10.15.3
-
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
+RUN npm install yarn -g
+
+ENV RAILS_ENV production
+
 ARG RAILS_MASTER_KEY
-ARG RDS_MYSQL_ENDPOINT
-ARG ESTREAK_DATABASE_PASSWORD
 
 ENV RAILS_MASTER_KEY $RAILS_MASTER_KEY
-ENV RDS_MYSQL_ENDPOINT $RDS_MYSQL_ENDPOINT
-ENV ESTREAK_DATABASE_PASSWORD $ESTREAK_DATABASE_PASSWORD
 
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 RUN rm -f tmp/pids/server.pid
