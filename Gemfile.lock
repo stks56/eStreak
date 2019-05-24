@@ -59,6 +59,11 @@ GEM
     arbre (1.2.1)
       activesupport (>= 3.0.0)
     arel (9.0.0)
+    asset_sync (2.7.0)
+      activemodel (>= 4.1.0)
+      fog-core
+      mime-types (>= 2.99)
+      unf
     bcrypt (3.1.12)
     bindex (0.7.0)
     bootsnap (1.4.3)
@@ -317,6 +322,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.6)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -340,6 +348,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  asset_sync (~> 2.7)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   byebug
