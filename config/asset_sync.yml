@@ -2,7 +2,7 @@ defaults: &defaults
   fog_provider: 'AWS'
   aws_access_key_id: "<%= Rails.application.credentials.aws[:s3_access_key_id] %>"
   aws_secret_access_key: "<%= Rails.application.credentials.aws[:s3_secret_access_key] %>"
-    fog_region: "<%= Rails.application.credentials.aws[:s3_region] %>"
+  fog_region: "<%= Rails.application.credentials.aws[:s3_region] %>"
 
   # To use AWS reduced redundancy storage.
   # aws_reduced_redundancy: true
