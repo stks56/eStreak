@@ -12,7 +12,7 @@ a {
 }
 
 .main-wrapper {
-  background: url("background.jpg") center center / cover no-repeat fixed;
+  background: image-url("background.jpg") center center / cover no-repeat fixed;
   padding-top: 50px;
   flex: 1;
 }
@@ -109,7 +109,7 @@ footer {
     color: white;
     line-height: 30px;
   }
-} 
+}
 
 /* flash */
 .flash {
