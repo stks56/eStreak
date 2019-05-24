@@ -28,3 +28,11 @@ RUN \
 COPY . $APP_ROOT
 
 EXPOSE  3000
+
+RUN npm install
+
+RUN npm install n -g
+RUN n 10.15.3
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
+RUN npm install yarn -g
