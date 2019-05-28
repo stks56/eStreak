@@ -17,7 +17,7 @@
       <div class="post-show-menu">
         <ul class="left">
           <% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
-            <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
+            <%= link_to("/likes/#{@post.id}/destroy", {method: "delete"}) do %>
               <li class="fas fa-heart like"><%= @post.likes.count %> いいねした！</li>
             <% end %>
           <% else %>
@@ -29,7 +29,7 @@
         <ul class="right">
           <% if current_user.id == @post.user_id %>
             <li><%= link_to "編集", edit_post_path(@post) %></li>
-            <li><%= link_to "削除", @post, method: "delete", data: { confirm: "#{@post.title}を削除します。よろしいですか？" } %></li>
+            <li><%= link_to "削除", @post, method: "delete", data: {confirm: "#{@post.title}を削除します。よろしいですか？" } %></li>
           <% end %>
         </ul>
       </div>

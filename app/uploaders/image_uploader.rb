@@ -3,10 +3,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   include CarrierWave::RMagick
-  process :resize_to_limit => [700, 700]
-  process :convert => 'jpg'
+  process resize_to_limit: [700, 700]
+  process convert: 'jpg'
   def extension_white_list
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production? || Rails.env.staging?
@@ -29,8 +29,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-  def default_url(*args)
-    "/images/users/" + [version_name, "default_user.jpg"].compact.join('_')
+  def default_url(*_args)
+    '/images/users/' + [version_name, 'default_user.jpg'].compact.join('_')
   end
   # Process files as they are uploaded:
   # process scale: [200, 300]
@@ -47,7 +47,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # Override the filename of the uploaded files:
