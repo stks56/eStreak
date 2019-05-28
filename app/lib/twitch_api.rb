@@ -28,17 +28,17 @@ class TwitchApi
         warn "redirected to #{location}"
         get_json(location, limit - 1)
       else
-        puts [uri.to_s, response.value].join(" : ")
+        return nil
       end
-    rescue => e
-      puts [uri.to_s, e.class, e].join(" : ")
+    rescue
+      return nil
     end
   end
 
   def self.get_game_id(game_name)
     uri = "https://api.twitch.tv/helix/games?name=#{game_name}"
     game = get_json(uri)
-    return game['data'][0]['id']
+    game['data'][0]['id']
   end
 
   def self.get_streams(game_name, first)
@@ -46,7 +46,7 @@ class TwitchApi
     game_id = get_game_id(game_name)
     uri = "https://api.twitch.tv/helix/streams?game_id=#{game_id}&first=#{first}&language=#{language}"
     game = get_json(uri)
-    return game['data']
+    game['data']
   end
 
   def self.get_streams_with_cache(game_name, first)
@@ -58,11 +58,11 @@ class TwitchApi
   def self.get_user(user_id)
     uri = "https://api.twitch.tv/helix/users?id=#{user_id}"
     user = get_json(uri)
-    return user['data']
+    user['data']
   end
 
   def self.get_user_with_cache(user_id)
-    Rails.cache.fetch("twitch_#{user_id}", expires_in: 24.hour) do
+    Rails.cache.fetch("twitch_#{user_id}", expires_in: 1.month) do
       get_user(user_id)
     end
   end
