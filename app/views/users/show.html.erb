@@ -8,10 +8,27 @@
           <%= link_to "編集", edit_user_registration_path %>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         <% end %>
+        <% if user_signed_in? && current_user.id != @user.id %>
+          <% if Follower.find_by(user_id: current_user.id, follower_id: @user.id) %>
+            <%= link_to "フォロー中", "/follower/#{@user.id}/destroy", {method: "delete", class: "unfollow"} %>
+          <% else %>
+            <%= link_to "フォローする", "/follower/#{@user.id}/create", {method: "post", class: "follow"} %>
+          <% end %>
+        <% end %>
       </div>
       <div class="follower-container">
         <h2>フォロー</h2>
+          <% @user_follows.each do |follow| %>
+            <%= link_to "/users/#{follow.id}" do %>
+              <%= image_tag follow.image.url %>
+            <% end %>
+          <% end %>
         <h2>フォロワー</h2>
+        <% @user_followers.each do |follower| %>
+          <%= link_to "/users/#{follower.user.id}" do %>
+            <%= image_tag follower.user.image.url %>
+          <% end %>
+        <% end %>
       </div>
     </div>
     <div class="user-show-main">
