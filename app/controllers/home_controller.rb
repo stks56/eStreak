@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   def top
-    @posts = Post.all.order("created_at desc").limit(10)
+    if user_signed_in?
+      redirect_to("/users/#{current_user.id}")
+    end
   end
 
   def about
