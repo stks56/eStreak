@@ -14,6 +14,8 @@ CarrierWave.configure do |config|
       region: Rails.application.credentials.aws[:s3_region],
       path_style: true
     }
+    config.fog_public = false
+    config.asset_host = 'https://dfpop0kc0xyhe.cloudfront.net'
   else
     config.storage :file
     config.enable_processing = false if Rails.env.test?
