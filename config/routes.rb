@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get 'likes' => 'likes#index'
   post 'likes/:post_id/create' => 'likes#create'
-  post 'likes/:post_id/destroy' => 'likes#destroy'
+  delete 'likes/:post_id/destroy' => 'likes#destroy'
 
   get 'games' => 'games#index'
   get 'games/:game_name' => 'games#show'
