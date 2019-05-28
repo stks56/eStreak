@@ -1,19 +1,22 @@
-require "net/http"
-require "uri"
+# frozen_string_literal: true
+
+require 'net/http'
+require 'uri'
 
 class TwitchApi
   if Rails.env.development?
-    TWITCH_ACCESS_TOKEN = ENV.fetch("TWITCH_ACCESS_TOKEN")
+    TWITCH_ACCESS_TOKEN = ENV.fetch('TWITCH_ACCESS_TOKEN')
   elsif Rails.env.production?
     TWITCH_ACCESS_TOKEN = Rails.application.credentials.api_key[:twitch_access_token]
   end
 
   def self.get_json(location, limit = 10)
     raise ArgumentError, 'too many HTTP redirects' if limit == 0
+
     uri = URI.parse(location)
     begin
       req = Net::HTTP::Get.new(uri.request_uri)
-      req["Client-ID"] = TWITCH_ACCESS_TOKEN
+      req['Client-ID'] = TWITCH_ACCESS_TOKEN
       response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
         http.open_timeout = 5
         http.read_timeout = 10
@@ -24,13 +27,13 @@ class TwitchApi
         json = response.body
         return JSON.parse(json)
       when Net::HTTPRedirection
-        location = response["location"]
+        location = response['location']
         warn "redirected to #{location}"
         get_json(location, limit - 1)
       else
         return nil
       end
-    rescue
+    rescue StandardError
       return nil
     end
   end
@@ -42,7 +45,7 @@ class TwitchApi
   end
 
   def self.get_streams(game_name, first)
-    language = "ja"
+    language = 'ja'
     game_id = get_game_id(game_name)
     uri = "https://api.twitch.tv/helix/streams?game_id=#{game_id}&first=#{first}&language=#{language}"
     game = get_json(uri)

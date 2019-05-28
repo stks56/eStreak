@@ -8,11 +8,11 @@ class FollowerController < ApplicationController
       follower_id: params[:id]
     )
     if follower.save
-      flash[:notice] = "このユーザーをフォローしました！"
+      flash[:notice] = 'このユーザーをフォローしました！'
       redirect_to("/users/#{params[:id]}")
     else
-      flash[:notice] = "不正なリクエストです"
-      redirect_to("/")
+      flash[:notice] = '不正なリクエストです'
+      redirect_to('/')
     end
   end
 
@@ -22,18 +22,18 @@ class FollowerController < ApplicationController
       follower_id: params[:id]
     )
     if follower.destroy
-      flash[:notice] = "このユーザーのフォローを外しました・・・"
+      flash[:notice] = 'このユーザーのフォローを外しました・・・'
       redirect_to("/users/#{params[:id]}")
     else
-      flash[:notice] = "不正なリクエストです"
-      redirect_to("/")
+      flash[:notice] = '不正なリクエストです'
+      redirect_to('/')
     end
   end
 
   def myself_can_not_follow
     if current_user.id == params[:id]
-      flash[:notice] = "不正なリクエストです"
-      redirect_to("/")
+      flash[:notice] = '不正なリクエストです'
+      redirect_to('/')
     end
   end
 end

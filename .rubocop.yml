@@ -1,3 +1,23 @@
+AllCops:
+  TargetRubyVersion: 2.4
+Rails:
+  Enabled: true
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+AsciiComments:
+  Enabled: false
+MethodLength:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+Style/BracesAroundHashParameters:
+  Enabled: false
