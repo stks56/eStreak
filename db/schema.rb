@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_002455) do
+ActiveRecord::Schema.define(version: 2019_05_31_130419) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -43,8 +43,6 @@ ActiveRecord::Schema.define(version: 2019_04_25_002455) do
     t.bigint "follower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follower_id"], name: "index_followers_on_follower_id"
-    t.index ["user_id"], name: "index_followers_on_user_id"
   end
 
   create_table "game_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -53,7 +51,6 @@ ActiveRecord::Schema.define(version: 2019_04_25_002455) do
     t.string "background_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_game_images_on_game_id"
   end
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -110,7 +107,4 @@ ActiveRecord::Schema.define(version: 2019_04_25_002455) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "followers", "users"
-  add_foreign_key "followers", "users", column: "follower_id"
-  add_foreign_key "game_images", "games"
 end
