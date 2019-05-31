@@ -5,7 +5,7 @@ RSpec.describe Post, type: :model do
   let(:user_b) { FactoryBot.create(:user, name: 'ユーザーB', email: 'b@exmple.com') }
   let(:game_a) { FactoryBot.create(:game, name: 'ゲームA') }
 
-  context 'FactoryBotが有効であること' do
+  describe 'FactoryBotが有効であること' do
     it 'user_aが有効であること' do
       expect(user_a).to be_valid
     end
@@ -19,7 +19,7 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  context 'Postモデルが有効であること' do
+  describe 'Postモデルが有効であること' do
     it '記事のタイトル、本文、user_id、game_idが有効であること' do
       user = user_a
       post = user.posts.create(
