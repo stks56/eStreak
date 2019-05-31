@@ -3,13 +3,13 @@ Eスポーツプレイヤーがゲームについての知識、戦略などを�
 転職活動用のポートフォリオとして制作致しました。
 
 # テストユーザーログイン
-email: test@e-streak.com
-password: password
+- email: test@e-streak.com
+- password: password
 ※観覧用としてご自由にお使いください
 
 # リンク
-本アプリ：https://e-streak.com/
-機能紹介記事：
+- 本アプリ：https://e-streak.com/
+- 機能紹介記事：
 
 # 特に見ていただきたい部分
 - Dockerを使いこなし、ECS/ECRで本番環境をコンテナで実行していること
@@ -51,8 +51,8 @@ password: password
 - いいね機能
 
 # テスト
-統合テスト(system spec)
-機能テスト(request spec)
-単体テスト
+- 統合テスト(system spec)
+- 機能テスト(request spec)
+- 単体テスト(モデル等)
 テストコードに関してはテストが書けるということアピールするというのが主な趣旨の為、根幹部分しか書いてません。
 その代わり実際の現場で要求されても対応できるよう色々な記述方法で書くことを意識して書きました。
