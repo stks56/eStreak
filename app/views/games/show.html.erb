@@ -77,21 +77,24 @@
         <div class="sidebar-container2">
           <div class="item-list">
           </div>
-          <% @twitch_streams.each do |stream| %>
-            <% user = TwitchApi.get_user_with_cache(stream["user_id"]) %>
-            <%= link_to("https://www.twitch.tv/#{user[0]["login"]}") do %>
-              <div class="stream-container">
-                <div class="stream-container-image">
-                  <%= image_tag user[0]["profile_image_url"] %>
-                </div>
-                <div class="stream-container-content">
-                  <h3><%= stream["title"].truncate(20) %></h3>
-                  <div class="stream-data">
-                    <span class="fas fa-user"><%= stream["viewer_count"] %></span>
-                    <span class="left">@<%= stream["user_name"] %></span>
+          <% @twitch_streams['data'].each do |stream| %>
+            <% begin %>
+              <% user = TwitchApi.get_user_with_cache(stream["user_id"]) %>
+              <%= link_to("https://www.twitch.tv/#{user['data'][0]["login"]}") do %>
+                <div class="stream-container">
+                  <div class="stream-container-image">
+                    <%= image_tag user['data'][0]["profile_image_url"] %>
+                  </div>
+                  <div class="stream-container-content">
+                    <h3><%= stream["title"].truncate(20) %></h3>
+                    <div class="stream-data">
+                      <span class="fas fa-user"><%= stream["viewer_count"] %></span>
+                      <span class="left">@<%= stream["user_name"] %></span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              <% end %>
+            <% rescue %>
             <% end %>
           <% end %>
         </div>

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validates :name, presence: true
+
   has_many :posts, dependent: :destroy
   accepts_nested_attributes_for :posts
   has_many :likes, dependent: :destroy

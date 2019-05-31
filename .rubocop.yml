@@ -5,6 +5,9 @@ Rails:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+Metrics/LineLength:
+  Exclude:
+    - 'spec/**/*'
 AsciiComments:
   Enabled: false
 MethodLength:

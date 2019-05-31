@@ -26,8 +26,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# データ関係
-/db/data
+# ローカルデータ
 /public/uploads
 
 # dotenv-rails

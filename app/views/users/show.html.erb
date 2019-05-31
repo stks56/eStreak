@@ -10,9 +10,9 @@
         <% end %>
         <% if user_signed_in? && current_user.id != @user.id %>
           <% if Follower.find_by(user_id: current_user.id, follower_id: @user.id) %>
-            <%= link_to "フォロー中", "/follower/#{@user.id}/destroy", {method: "delete", class: "unfollow"} %>
+            <%= link_to "フォロー中", "/follower/#{@user.id}/destroy", {method: "delete", class: "unfollow", id: "unfollow"} %>
           <% else %>
-            <%= link_to "フォローする", "/follower/#{@user.id}/create", {method: "post", class: "follow"} %>
+            <%= link_to "フォローする", "/follower/#{@user.id}/create", {method: "post", class: "follow", id: "follow"} %>
           <% end %>
         <% end %>
       </div>

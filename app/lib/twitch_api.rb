@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'net/http'
 require 'uri'
 
@@ -12,6 +10,7 @@ class TwitchApi
 
   def self.get_json(location, limit = 10)
     raise ArgumentError, 'too many HTTP redirects' if limit == 0
+    logger = Logger.new('./log/twitchapi.log')
 
     uri = URI.parse(location)
     begin
@@ -20,7 +19,7 @@ class TwitchApi
       response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
         http.open_timeout = 5
         http.read_timeout = 10
-        res = http.request(req)
+        http.request(req)
       end
       case response
       when Net::HTTPSuccess
@@ -30,11 +29,18 @@ class TwitchApi
         location = response['location']
         warn "redirected to #{location}"
         get_json(location, limit - 1)
+        logger.warn("Redirection: code=#{response.code} message=#{response.message}")
       else
-        return nil
+        logger.error("HTTP ERROR: code=#{response.code} message=#{response.message}")
       end
-    rescue StandardError
-      return nil
+    rescue IOError => e
+      logger.error(e.message)
+    rescue TimeoutError => e
+      logger.error(e.message)
+    rescue JSON::ParserError => e
+      logger.error(e.message)
+    rescue => e
+      logger.error(e.message)
     end
   end
 
@@ -48,8 +54,7 @@ class TwitchApi
     language = 'ja'
     game_id = get_game_id(game_name)
     uri = "https://api.twitch.tv/helix/streams?game_id=#{game_id}&first=#{first}&language=#{language}"
-    game = get_json(uri)
-    game['data']
+    get_json(uri)
   end
 
   def self.get_streams_with_cache(game_name, first)
@@ -60,8 +65,7 @@ class TwitchApi
 
   def self.get_user(user_id)
     uri = "https://api.twitch.tv/helix/users?id=#{user_id}"
-    user = get_json(uri)
-    user['data']
+    get_json(uri)
   end
 
   def self.get_user_with_cache(user_id)

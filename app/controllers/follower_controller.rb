@@ -22,7 +22,7 @@ class FollowerController < ApplicationController
       follower_id: params[:id]
     )
     if follower.destroy
-      flash[:notice] = 'このユーザーのフォローを外しました・・・'
+      flash[:notice] = 'このユーザーのフォローを外しました...'
       redirect_to("/users/#{params[:id]}")
     else
       flash[:notice] = '不正なリクエストです'

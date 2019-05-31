@@ -62,8 +62,12 @@
           <% end %>
         </ul>
       </div>
-      <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "flash #{key}") %>
+      <% [:notice, :error, :alert].each do |level| %>
+        <% unless flash[level].blank? %>
+          <div class="flash <%= level %>">
+            <%= content_tag :p, flash[level] %>
+          </div>
+        <% end %>
       <% end %>
     </header>
     <%= yield %>
