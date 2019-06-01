@@ -20,13 +20,13 @@
         <h2>フォロー</h2>
           <% @user_follows.each do |follow| %>
             <%= link_to "/users/#{follow.id}" do %>
-              <%= image_tag follow.image.url %>
+              <%= image_tag follow.image.url(:thumb) %>
             <% end %>
           <% end %>
         <h2>フォロワー</h2>
         <% @user_followers.each do |follower| %>
           <%= link_to "/users/#{follower.user.id}" do %>
-            <%= image_tag follower.user.image.url %>
+            <%= image_tag follower.user.image.url(:thumb) %>
           <% end %>
         <% end %>
       </div>
