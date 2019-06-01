@@ -8,8 +8,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :thumb do
     process resize_to_fit: [50, 50]
   end
-  
-  process convert: 'jpg'
+
+  process convert: 'png'
 
   def extension_white_list
     %w[jpg jpeg gif png]
@@ -36,7 +36,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
   def default_url(*_args)
-    '/images/users/' + [version_name, 'default_user.jpg'].compact.join('_')
+    '/images/users/' + [version_name, 'default_user.png'].compact.join('_')
   end
   # Process files as they are uploaded:
   # process scale: [200, 300]
@@ -56,6 +56,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    'user_image' + '.jpg' if original_filename
+    'user_image' + '.png' if original_filename
   end
 end
