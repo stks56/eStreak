@@ -26,19 +26,19 @@ Eスポーツプレイヤーがゲームについての知識、戦略などを�
 - Ruby on Rails 5.2.2
 - MySQL 5.7.25
 - AWS
- - ECS/ECR
- - EC2/ALB
- - RDS for MySQL
- - S3
- - CloudFront
- - SES
- - Route53
- - Certificate Manager
- - VPC
- - CloudWatch
+  - ECS/ECR
+  - EC2/ALB
+  - RDS for MySQL
+  - S3
+  - CloudFront
+  - SES
+  - Route53
+  - Certificate Manager
+  - VPC
+  - CloudWatch
 - Docker
 - CircleCI
- - ecs-deploy
+  - ecs-deploy
 - GitHub
 
 # 機能一覧、使用した有名gem
