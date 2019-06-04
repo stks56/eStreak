@@ -39,6 +39,7 @@ gem 'rails-i18n'
 
 gem 'activeadmin'
 gem 'asset_sync', '~> 2.7'
+gem 'aws-ses', '~> 0.6.0'
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 gem 'devise'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.1'
