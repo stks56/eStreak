@@ -62,7 +62,7 @@ docker-composeでVolumeをマウント、MySQLに関してもローカルのMySQ
 
 GitHubは実際の現場の開発フローを想定しmasterブランチに直接pushせず、worksという作業用のブランチを切ってそこにPush、Masterにmergeしています。
 
-#CircleCI
+# CircleCI
 CircleCIではworksではRSpecでのテスト、masterブランチではRSpecでのテストとECRへイメージのpush、ECSへの自動デプロイを行っています。
 CircleCIの設定は[.ciecleci/config.yml](/.circleci/config.yml)を見て頂けるとわかるかと思います。
 ECSへのデプロイには[ecs-deploy](https://github.com/silinternational/ecs-deploy)というツールを使用しています。
