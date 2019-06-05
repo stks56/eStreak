@@ -62,7 +62,7 @@ docker-composeでVolumeをマウント、MySQLに関してもローカルのMySQ
 
 GitHubは実際の現場の開発フローを想定しmasterブランチに直接pushせず、worksという作業用のブランチを切ってそこにPush、Masterにmergeしています。
 
-#CircleCI
+# CircleCI
 CircleCIではworksではRSpecでのテスト、masterブランチではRSpecでのテストとECRへイメージのpush、ECSへの自動デプロイを行っています。
 CircleCIの設定は[.ciecleci/config.yml](/.circleci/config.yml)を見て頂けるとわかるかと思います。
 ECSへのデプロイには[ecs-deploy](https://github.com/silinternational/ecs-deploy)というツールを使用しています。
@@ -93,10 +93,8 @@ ECSへのデプロイには[ecs-deploy](https://github.com/silinternational/ecs-
 
 # 改善点、開発してみて想定できなかった部分
 - issueにもありますが結構解決できてないbugが結構あります。
-- Dockerfileが重すぎる、pushやbuildに時間がかかりすぎているので軽量化したい。
-Alpine Linuxを使っているRubyイメージが公式にあるのでそれを使えば軽くなりそう。apt-get updateで入るnodeのバージョンが低く手動でアップデートしているのでその辺も解決できそう
-- CSSフレームワークを使用するべきだった。
-設計段階ではBootstrapも視野に入れていたが、Bootstrap臭さがどうしても残る為オリジナルのデザインにしたかった。
+- Dockerfileが重すぎる、pushやbuildに時間がかかりすぎているので軽量化したい。Alpine Linuxを使っているRubyイメージが公式にあるのでそれを使えば軽くなりそう。apt-get updateで入るnodeのバージョンが低く手動でアップデートしているのでその辺も解決できそう
+- CSSフレームワークを使用するべきだった。設計段階ではBootstrapも視野に入れていたが、Bootstrap臭さがどうしても残る為オリジナルのデザインにしたかった。
 実際書いて見るとSASSを使っているにしてもCSSのコーディングに想定以上に時間が掛かってしまった。
 バックエンドエンジニアを目指しているのでフロントエンド面は簡潔にするべきだった。
 - インフラ等の非機能要件は充実しているが、それに比べ実際のアプリの機能面で見るとチープに見えてしまいポートフォリオとしてのインパクトが欠けてしまったように思える。
