@@ -68,6 +68,7 @@ CircleCIの設定は[.ciecleci/config.yml](/.circleci/config.yml)を見て頂け
 ECSへのデプロイには[ecs-deploy](https://github.com/silinternational/ecs-deploy)というツールを使用しています。
 
 最終的にmasterにmergeされてからデプロイされるまでの時間はこのようになりました。
+![CircleCIワークフロー](https://user-images.githubusercontent.com/47154781/58921133-614c7b80-8770-11e9-8326-24a70688241a.png)
 
 # 機能一覧、使用した有名gem
 - ユーザー登録、ログイン機能全般、パスワードを忘れた際のメール配信(devise)
