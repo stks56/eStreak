@@ -41,7 +41,7 @@ eスポーツプレイヤーがゲームについての知識、戦略などを�
 - GitHub
 
 # クラウドアーキテクチャ
-[![クラウドアーキテクチャ](https://user-images.githubusercontent.com/47154781/58918750-9522a380-8766-11e9-9285-9f1177ad5af3.png)](https://e-streak.com/)
+![クラウドアーキテクチャ](https://user-images.githubusercontent.com/47154781/58918750-9522a380-8766-11e9-9285-9f1177ad5af3.png)
 
 CricleCIからESRにpushした[本番環境用イメージ](/Dockerfile_PRO)を使い、ECSのEC2インスタンスタイプでデプロイしています。
 webサーバー等は使わずアプリケーションサーバー(puma)のみを使い、ALBでリクエストの分配を行っています。
