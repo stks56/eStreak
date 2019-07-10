@@ -12,5 +12,16 @@ ActiveAdmin.register User do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+  form do |f|
+    f.inputs 'ユーザー名変更' do
+      f.input :name
+    end
+
+    f.inputs 'パスワードリセット' do
+      f.input :password
+    end
+
+    f.actions
+  end
 
 end
