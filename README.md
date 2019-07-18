@@ -102,7 +102,6 @@ ECSへのデプロイには[ecs-deploy](https://github.com/silinternational/ecs-
 # GraphQL API
 [実装日7/19]
 - endpoint：https://e-streak.com/graphql
-- web console:https://e-streak.com/graphiql
 
 GraphQL APIを追加しました。
 今はqueryでのusertype,posttype,gametypeのみのアクセスを実装しています。

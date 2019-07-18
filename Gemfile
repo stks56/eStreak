@@ -45,7 +45,6 @@ gem 'devise'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.1'
 gem 'fog-aws', '~> 3.4'
 gem 'graphql', '~> 1.9', '>= 1.9.7'
-gem 'graphiql-rails'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'kaminari', '~> 1.1.1'
 gem 'omniauth-twitch', '~> 1.0'
@@ -80,3 +79,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem 'graphiql-rails', group: :development
