@@ -1,12 +1,11 @@
 module Types
   class QueryType < Types::BaseObject
     field :post, PostType, null: true do
-      description 'Find a post by id or title'
-      argument :id, ID, required: false
-      argument :title, String, required: false
+      description 'Find a post by id'
+      argument :id, ID, required: true
     end
-    def post(*arg)
-      Post.find_by(*arg)
+    def post(id:)
+      Post.find_by(id: id)
     end
 
     field :posts, [Types::PostType], null: true, description: 'Find all posts'
@@ -15,12 +14,11 @@ module Types
     end
 
     field :user, UserType, null: true do
-      description 'Find a user by id or name'
-      argument :id, ID, required: false
-      argument :name, String, required: false
+      description 'Find a user by id'
+      argument :id, ID, required: true
     end
-    def user(*arg)
-      User.find_by(*arg)
+    def user(id:)
+      User.find_by(id: id)
     end
 
     field :users, [Types::UserType], null: true, description: 'Find all users'
