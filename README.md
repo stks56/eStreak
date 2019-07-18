@@ -98,3 +98,14 @@ ECSへのデプロイには[ecs-deploy](https://github.com/silinternational/ecs-
 実際書いて見るとSASSを使っているにしてもCSSのコーディングに想定以上に時間が掛かってしまった。
 バックエンドエンジニアを目指しているのでフロントエンド面は簡潔にするべきだった。
 - インフラ等の非機能要件は充実しているが、それに比べ実際のアプリの機能面で見るとチープに見えてしまいポートフォリオとしてのインパクトが欠けてしまったように思える。
+
+# GraphQL API
+[実装日7/19]
+- endpoint：https://e-streak.com/graphql
+- web console:https://e-streak.com/graphiql
+
+GraphQL APIを追加しました。
+今はqueryでのusertype,posttype,gametypeのみのアクセスを実装しています。
+graphql関係のコードは[こちら](/app/graphql)です。
+
+mutation、subscriptionを順次実装予定で今後はフロントをReactに置き換え予定です。
