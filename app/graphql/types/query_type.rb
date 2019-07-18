@@ -15,12 +15,11 @@ module Types
     end
 
     field :user, UserType, null: true do
-      description 'Find a user by id or name'
+      description 'Find a user by id'
       argument :id, ID, required: false
-      argument :name, String, required: false
     end
-    def user(*arg)
-      User.find_by(*arg)
+    def user(id:)
+      User.find_by(id: id)
     end
 
     field :users, [Types::UserType], null: true, description: 'Find all users'
