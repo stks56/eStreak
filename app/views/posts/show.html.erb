@@ -16,7 +16,7 @@
     <% if current_user %>
       <div class="post-show-menu">
         <ul class="left">
-          <% if Like.find_by(post_id: @post.id, user_id: current_user.id) %>
+          <% if @liked_flag %>
             <%= link_to("/likes/#{@post.id}/destroy", {method: "delete"}) do %>
               <li class="fas fa-heart like"><%= @post.likes.count %> いいねした！</li>
             <% end %>

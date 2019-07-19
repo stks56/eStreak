@@ -7,5 +7,11 @@ class UsersController < ApplicationController
     follows = Follower.where(user_id: params[:id]).pluck(:follower_id)
     @user_follows = User.where(id: follows)
     @user_followers = Follower.where(follower_id: params[:id]).includes(:user)
+    if current_user
+      @followed_flag = Follower.find_by(
+        user_id: current_user.id,
+        follower_id: @user.id
+      )
+    end
   end
 end

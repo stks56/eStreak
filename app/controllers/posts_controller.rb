@@ -8,6 +8,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
+    if current_user
+      @liked_flag = Like.find_by(post_id: @post.id, user_id: current_user.id)
+    end
   end
 
   def new
