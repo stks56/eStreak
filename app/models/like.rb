@@ -3,5 +3,6 @@ class Like < ApplicationRecord
   validates :user_id, presence: true
 
   belongs_to :post
+  counter_culture :post
   belongs_to :user
 end
