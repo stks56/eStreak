@@ -3,12 +3,12 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   def index
-    @posts = Post.page(params[:page]).per(10).order('created_at desc')
+    @posts = Post.page(params[:page]).per(10).order('created_at desc').includes(:user, :game)
   end
 
   def show
     @post = Post.find_by(id: params[:id])
-    if current_user
+    if user_signed_in?
       @liked_flag = Like.find_by(post_id: @post.id, user_id: current_user.id)
     end
   end

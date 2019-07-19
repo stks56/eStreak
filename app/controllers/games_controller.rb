@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.all.limit(20)
+    @games = Game.all.includes(:game_image).limit(20)
   end
 
   def show
@@ -10,6 +10,7 @@ class GamesController < ApplicationController
                  .page(params[:page])
                  .per(10)
                  .order('created_at desc')
+                 .includes(:user, :game)
 
     like_ranks = Like.where(game_id: @game.id)
                      .group(:post_id)

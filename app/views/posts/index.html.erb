@@ -21,7 +21,7 @@
                 <span>@<%= link_to(post.user.name, "/users/#{post.user.id}") %></span>
               </div>
               <div class="post-data">
-                <span class="fas fa-heart"><%= post.likes.count %></span>
+                <span class="fas fa-heart"><%= post.likes_count %></span>
                 <span class="">カテゴリー：<%= link_to(post.game.name, "/games/#{post.game.name}") %></span>
                 <span>投稿：<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></span>
               </div>

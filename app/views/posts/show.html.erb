@@ -18,11 +18,11 @@
         <ul class="left">
           <% if @liked_flag %>
             <%= link_to("/likes/#{@post.id}/destroy", {method: "delete"}) do %>
-              <li class="fas fa-heart like"><%= @post.likes.count %> いいねした！</li>
+              <li class="fas fa-heart like"><%= @post.likes_count %> いいねした！</li>
             <% end %>
           <% else %>
             <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
-              <li class="far fa-heart"><%= @post.likes.count %> いいねする！</li>
+              <li class="far fa-heart"><%= @post.likes_count %> いいねする！</li>
             <% end %>
           <% end %>
         </ul>
@@ -37,7 +37,7 @@
       <div class="post-show-menu">
         <ul class="left">
           <%= link_to new_user_session_path do %>
-            <li class="far fa-heart"><%= @post.likes.count %> ※いいねをするにはログインが必要です</li>
+            <li class="far fa-heart"><%= @post.likes_count %> ※いいねをするにはログインが必要です</li>
           <% end %>
         </ul>
       </div>

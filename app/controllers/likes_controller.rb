@@ -2,10 +2,10 @@ class LikesController < ApplicationController
   before_action :authenticate_user!, {only: [:create, :destroy]}
 
   def index
-    like_ranks = Like.group(:post_id)
-                     .order(Arel.sql('count(post_id) desc'))
-                     .limit(10).pluck(:post_id)
-    @posts_rank = Post.find(like_ranks)
+    @posts_rank = Post.all
+                      .order("likes_count DESC")
+                      .limit(10)
+                      .includes(:user, :game)
   end
 
   def create
