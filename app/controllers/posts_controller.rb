@@ -46,6 +46,8 @@ class PostsController < ApplicationController
     redirect_to('/posts')
   end
 
+  private
+
   def ensure_correct_user
     @post = Post.find_by(id: params[:id])
     if current_user.id != @post.user_id
@@ -53,8 +55,6 @@ class PostsController < ApplicationController
       redirect_to('/')
     end
   end
-
-  private
 
   def post_params
     params.require(:post).permit(:title, :game_id, :content)
