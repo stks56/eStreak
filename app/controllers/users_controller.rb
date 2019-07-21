@@ -6,8 +6,7 @@ class UsersController < ApplicationController
                  .per(10)
                  .order('created_at desc')
                  .includes(:user, :game)
-    follows = Follower.where(user_id: params[:id]).pluck(:follower_id)
-    @user_follows = User.where(id: follows)
+    @user_follows = User.where(id: Follower.user_follows_id_list(id: params[:id]))
     @user_followers = Follower.where(follower_id: params[:id]).includes(:user)
     if user_signed_in?
       @followed_flag = Follower.find_by(
