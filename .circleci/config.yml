@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/eStreak
   test:
@@ -28,11 +28,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          - v1-dependencies-
+          - v2-dependencies-{{ checksum "Gemfile.lock" }}
+          - v2-dependencies-
       - run:
           name: install dependencies
           command: |
@@ -40,7 +40,7 @@ jobs:
       - save_cache:
           paths:
           - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
       # Database setup
       - run: rm ./config/database.yml
       - run: mv ./config/database.yml.ci ./config/database.yml
