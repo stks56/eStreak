@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   checkout_code:
     docker:
-      - image: stks56/estreak_pro:latest
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
     working_directory: ~/eStreak
     steps:
       - checkout
@@ -12,7 +12,7 @@ jobs:
             - ~/eStreak
   test:
     docker:
-      - image: stks56/estreak_pro:latest
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
         environment:
           RAILS_ENV: test
           MYSQL_HOST: 127.0.0.1
@@ -87,7 +87,7 @@ jobs:
       - run:
           name: "Build & Push Docker Image"
           command: |
-            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1 -f Dockerfile_PRO --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY .
+            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1 -f Dockerfile.PRO --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY .
             docker push $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
 
       - run:
