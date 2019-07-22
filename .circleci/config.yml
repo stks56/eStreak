@@ -2,17 +2,17 @@ version: 2.1
 jobs:
   checkout_code:
     docker:
-      - image: stks56/estreak_pro:latest
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
     working_directory: ~/eStreak
     steps:
       - checkout
       - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/eStreak
   test:
     docker:
-      - image: stks56/estreak_pro:latest
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
         environment:
           RAILS_ENV: test
           MYSQL_HOST: 127.0.0.1
@@ -28,11 +28,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          - v1-dependencies-
+          - v2-dependencies-{{ checksum "Gemfile.lock" }}
+          - v2-dependencies-
       - run:
           name: install dependencies
           command: |
@@ -40,7 +40,7 @@ jobs:
       - save_cache:
           paths:
           - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
       # Database setup
       - run: rm ./config/database.yml
       - run: mv ./config/database.yml.ci ./config/database.yml
@@ -87,7 +87,7 @@ jobs:
       - run:
           name: "Build & Push Docker Image"
           command: |
-            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1 -f Dockerfile_PRO --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY .
+            docker build -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1 -f Dockerfile.PRO --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY .
             docker push $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com/estreak_app_repo:$CIRCLE_SHA1
 
       - run:
