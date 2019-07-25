@@ -43,7 +43,7 @@ eスポーツプレイヤーがゲームについての知識、戦略などを�
 # クラウドアーキテクチャ
 ![クラウドアーキテクチャ](https://user-images.githubusercontent.com/47154781/58918750-9522a380-8766-11e9-9285-9f1177ad5af3.png)
 
-CricleCIからESRにpushした[本番環境用イメージ](/Dockerfile_PRO)を使い、ECSのEC2インスタンスタイプでデプロイしています。
+CricleCIからESRにpushした[本番環境用イメージ](/Dockerfile.pro)を使い、ECSのEC2インスタンスタイプでデプロイしています。
 webサーバー等は使わずアプリケーションサーバー(puma)のみを使い、ALBでリクエストの分配を行っています。
 ALBではHTTPからHTTPSへのリダイレクトをしており、常時SSL化を実現しています。
 
@@ -57,7 +57,7 @@ GitHub上では可視化されませんが、AWSではVPC内のセキュリテ�
 
 # 開発環境
 MacBookPro上のDocker環境で開発しています。
-[開発環境用イメージ](/Dockerfile)とそれらを起動する[docker-compose](/docker-compose.yml)で構成されています。
+[開発環境用イメージ](/Dockerfile.dev)とそれらを起動する[docker-compose](/docker-compose.yml)で構成されています。
 docker-composeでVolumeをマウント、MySQLに関してもローカルのMySQLをマウントしています。
 
 GitHubは実際の現場の開発フローを想定しmasterブランチに直接pushせず、worksという作業用のブランチを切ってそこにPush、Masterにmergeしています。
