@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   validates :name, presence: true
+  validate :test_user_is_unchangeable
+  before_destroy :test_user_is_not_deletable
 
   has_many :posts, dependent: :destroy
   accepts_nested_attributes_for :posts
@@ -10,9 +12,9 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :lockable, :timeoutable, :omniauthable, omniauth_providers: [:twitter, :twitch]
+  devise :database_authenticatable, :registerable, :recoverable,
+         :rememberable, :trackable, :validatable, :lockable,
+         :timeoutable, :omniauthable, omniauth_providers: [:twitter, :twitch]
 
   mount_uploader :image, ImageUploader
 
@@ -24,5 +26,19 @@ class User < ApplicationRecord
       user.username = auth.info.name
       user.remote_image_url = auth.info.image
     end
+  end
+
+  private
+
+  def test_user_is_unchangeable
+    errors.add(:base, 'テストユーザーの情報は変更できません') if test_user?
+  end
+
+  def test_user_is_not_deletable
+    throw :abort if test_user?
+  end
+
+  def test_user?
+    self == User.find_by(email: 'test@e-streak.com')
   end
 end

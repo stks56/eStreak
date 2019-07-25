@@ -13,7 +13,7 @@
     <% if @post.created_at != @post.updated_at %>
       <span>更新日時：<%= @post.updated_at.strftime('%Y/%m/%d %H:%M') %></span>
     <% end %>
-    <% if current_user %>
+    <% if user_signed_in? %>
       <div class="post-show-menu">
         <ul class="left">
           <% if @liked_flag %>
